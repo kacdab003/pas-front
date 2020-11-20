@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Navbar from '../components/UI/Navbar/Navbar';
-import { StyledLayout } from './StyledLayout';
+import { StyledContainer, StyledLayout } from './StyledLayout';
 
 const Layout = (props) => {
   const [isModalOpened, setIsModalOpened] = useState(false);
@@ -12,7 +12,7 @@ const Layout = (props) => {
   return (
     <StyledLayout>
       <Navbar isOpen={isModalOpened} onToggle={toggleModalHandler} />
-      {props.children}
+      <StyledContainer>{props.children}</StyledContainer>
     </StyledLayout>
   );
 };

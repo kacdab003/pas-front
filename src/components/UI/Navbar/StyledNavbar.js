@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 
-export const StyledNavbar = styled.div`
+export const StyledNavbar = styled.nav`
   width: 32%;
   height: 100%;
   display: grid;
   position: fixed;
+  top: 0;
+  left: 0;
   background: linear-gradient(#005fee, #003a90);
   grid-template-rows: 1fr 9fr;
   align-items: center;
