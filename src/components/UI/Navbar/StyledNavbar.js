@@ -10,5 +10,5 @@ export const StyledNavbar = styled.div`
   align-items: center;
   color: rgba(255, 255, 255, 0.7);
   transition: ease-in-out 0.2s;
-  transform: translateX(${({ isOpen }) => (isOpen ? '0px' : '-85%')});
+  transform: translateX(${({ isOpen }) => (isOpen ? '0px' : 'calc(70px - 100%)')});
 `;
