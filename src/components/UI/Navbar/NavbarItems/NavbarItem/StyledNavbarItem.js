@@ -19,6 +19,8 @@ export const StyledNavbarItemIcon = styled.img`
 `;
 
 export const StyledNavlink = styled(NavLink)`
+  display: flex;
+  align-items: center;
   color: white;
   text-decoration: none;
   &.active {
