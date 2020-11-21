@@ -6,14 +6,14 @@ import archiveIcon from '../../../../assets/icons/navbar/archive_white.svg';
 import repairIcon from '../../../../assets/icons/navbar/repair_white.svg';
 import logoutIcon from '../../../../assets/icons/navbar/logout_white.svg';
 import { StyledNavbarItems } from './StyledNavbarItems';
-const NavbarItems = () => {
+const NavbarItems = ({ onToggle }) => {
   return (
     <StyledNavbarItems>
-      <NavbarItem navIcon={homeIcon} title={'Home'} />
-      <NavbarItem navIcon={addIcon} title={'Create new report'} />
-      <NavbarItem navIcon={archiveIcon} title={'Archive'} />
-      <NavbarItem navIcon={repairIcon} title={'Create repair report'} />
-      <NavbarItem navIcon={logoutIcon} title={'Log out'} />
+      <NavbarItem navIcon={homeIcon} title={'Home'} path={'/'} onToggle={onToggle} exact />
+      <NavbarItem navIcon={addIcon} title={'Create new report'} onToggle={onToggle} path={'/new-report'} />
+      <NavbarItem navIcon={archiveIcon} title={'Archive'} path={'/archive'} onToggle={onToggle} />
+      <NavbarItem navIcon={repairIcon} title={'Create repair report'} path={'/repair-report'} onToggle={onToggle} />
+      <NavbarItem navIcon={logoutIcon} title={'Log out'} onToggle={onToggle} path={'/logout'} />
     </StyledNavbarItems>
   );
 };

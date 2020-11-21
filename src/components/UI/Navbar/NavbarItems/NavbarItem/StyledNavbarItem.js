@@ -1,7 +1,8 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 export const StyledNavbarItem = styled.li`
+  width: auto;
   display: flex;
   list-style: none;
   align-items: center;
@@ -17,7 +18,13 @@ export const StyledNavbarItemIcon = styled.img`
   margin: 0 1rem;
 `;
 
-export const StyledNavlink = styled(Link)`
+export const StyledNavlink = styled(NavLink)`
   color: white;
   text-decoration: none;
+  &.active {
+    opacity: 0.5;
+  }
+  &:hover {
+    cursor: pointer;
+  }
 `;
