@@ -4,6 +4,7 @@ import CenteredLoader from '../UI/CenteredLoader/CenteredLoader';
 import ArchiveResult from './ArchiveResult/ArchiveResult';
 import ArchiveResultsHeader from './ArchiveResultsHeader/ArchiveResultsHeader';
 import { ResultsTable } from './StyledArchiveResults';
+import moment from 'moment';
 
 const ArchiveResults = () => {
   const [archiveResults, setArchiveResults] = useState([]);
@@ -14,8 +15,9 @@ const ArchiveResults = () => {
       const results = await Axios.get('http://localhost:3000/reports');
       console.log(results.data);
       const mappedResults = results.data.map((result) => ({
+        key: result._id,
         id: result.nr,
-        date: result.createdAt,
+        date: moment(result.createdAt).format('YYYY-MM-DD hh:mm'),
         configuration: result.configuration,
         fullName: result.worker.name + ' ' + result.worker.surname,
         office: result.worker.position === 'ENGINEER' ? 'INŻYNIER' : 'TECHNIK',
@@ -30,17 +32,20 @@ const ArchiveResults = () => {
   }
   return (
     <ResultsTable>
-      <ArchiveResultsHeader />
-      {!isLoading &&
-        archiveResults.map((result) => (
-          <ArchiveResult
-            id={result.id}
-            date={result.date}
-            configuration={result.configuration}
-            fullName={result.fullName}
-            office={result.office}
-          />
-        ))}
+      <tbody>
+        <ArchiveResultsHeader />
+        {!isLoading &&
+          archiveResults.map((result) => (
+            <ArchiveResult
+              key={result.key}
+              id={result.id}
+              date={result.date}
+              configuration={result.configuration}
+              fullName={result.fullName}
+              office={result.office}
+            />
+          ))}
+      </tbody>
     </ResultsTable>
   );
 };

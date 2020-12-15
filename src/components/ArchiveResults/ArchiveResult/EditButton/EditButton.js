@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import editIcon from '../../../../assets/icons/edit.png';
+import editIcon from '../../../../assets/icons/loupe.png';
 
 export const EditButton = styled.a`
   display: block;
