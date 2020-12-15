@@ -7,8 +7,8 @@ const ArchiveResultHeader = () => {
       <HeaderElement>Nr</HeaderElement>
       <HeaderElement>Data utworzenia</HeaderElement>
       <HeaderElement>Konfiguracja</HeaderElement>
-      <HeaderElement>Inżynier</HeaderElement>
-      <HeaderElement>Technik</HeaderElement>
+      <HeaderElement>Imię i nazwisko</HeaderElement>
+      <HeaderElement>Stanowisko</HeaderElement>
     </HeaderContainer>
   );
 };

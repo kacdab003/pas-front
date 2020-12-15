@@ -1,44 +1,46 @@
-import React from 'react';
+import Axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import CenteredLoader from '../UI/CenteredLoader/CenteredLoader';
 import ArchiveResult from './ArchiveResult/ArchiveResult';
 import ArchiveResultsHeader from './ArchiveResultsHeader/ArchiveResultsHeader';
 import { ResultsTable } from './StyledArchiveResults';
 
 const ArchiveResults = () => {
-  const archiveResults = [
-    { id: '1234/2020', date: '2020-08-12', configuration: '1+3', engineer: 'Jan Kowalski', technician: 'Tomasz Nowak' },
-    { id: '1234/2020', date: '2020-08-12', configuration: '1+3', engineer: 'Jan Kowalski', technician: 'Tomasz Nowak' },
-    { id: '1234/2020', date: '2020-08-12', configuration: '1+3', engineer: 'Jan Kowalski', technician: 'Tomasz Nowak' },
-    { id: '1234/2020', date: '2020-08-12', configuration: '1+3', engineer: 'Jan Kowalski', technician: 'Tomasz Nowak' },
-    { id: '1234/2020', date: '2020-08-12', configuration: '1+3', engineer: 'Jan Kowalski', technician: 'Tomasz Nowak' },
-    { id: '1234/2020', date: '2020-08-12', configuration: '1+3', engineer: 'Jan Kowalski', technician: 'Tomasz Nowak' },
-    { id: '1234/2020', date: '2020-08-12', configuration: '1+3', engineer: 'Jan Kowalski', technician: 'Tomasz Nowak' },
-    { id: '1234/2020', date: '2020-08-12', configuration: '1+3', engineer: 'Jan Kowalski', technician: 'Tomasz Nowak' },
-    { id: '1234/2020', date: '2020-08-12', configuration: '1+3', engineer: 'Jan Kowalski', technician: 'Tomasz Nowak' },
-    { id: '1234/2020', date: '2020-08-12', configuration: '1+3', engineer: 'Jan Kowalski', technician: 'Tomasz Nowak' },
-    { id: '1234/2020', date: '2020-08-12', configuration: '1+3', engineer: 'Jan Kowalski', technician: 'Tomasz Nowak' },
-    { id: '1234/2020', date: '2020-08-12', configuration: '1+3', engineer: 'Jan Kowalski', technician: 'Tomasz Nowak' },
-    { id: '1234/2020', date: '2020-08-12', configuration: '1+3', engineer: 'Jan Kowalski', technician: 'Tomasz Nowak' },
-    { id: '1234/2020', date: '2020-08-12', configuration: '1+3', engineer: 'Jan Kowalski', technician: 'Tomasz Nowak' },
-    { id: '1234/2020', date: '2020-08-12', configuration: '1+3', engineer: 'Jan Kowalski', technician: 'Tomasz Nowak' },
-    { id: '1234/2020', date: '2020-08-12', configuration: '1+3', engineer: 'Jan Kowalski', technician: 'Tomasz Nowak' },
-    { id: '1234/2020', date: '2020-08-12', configuration: '1+3', engineer: 'Jan Kowalski', technician: 'Tomasz Nowak' },
-    { id: '1234/2020', date: '2020-08-12', configuration: '1+3', engineer: 'Jan Kowalski', technician: 'Tomasz Nowak' },
-    { id: '1234/2020', date: '2020-08-12', configuration: '1+3', engineer: 'Jan Kowalski', technician: 'Tomasz Nowak' },
-    { id: '1234/2020', date: '2020-08-12', configuration: '1+3', engineer: 'Jan Kowalski', technician: 'Tomasz Nowak' },
-    { id: '1234/2020', date: '2020-08-12', configuration: '1+3', engineer: 'Jan Kowalski', technician: 'Tomasz Nowak' },
-  ];
+  const [archiveResults, setArchiveResults] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchArchiveResults = async () => {
+      const results = await Axios.get('http://localhost:3000/reports');
+      console.log(results.data);
+      const mappedResults = results.data.map((result) => ({
+        id: result.nr,
+        date: result.createdAt,
+        configuration: result.configuration,
+        fullName: result.worker.name + ' ' + result.worker.surname,
+        office: result.worker.position === 'ENGINEER' ? 'INŻYNIER' : 'TECHNIK',
+      }));
+      setArchiveResults(mappedResults);
+      setIsLoading(false);
+    };
+    fetchArchiveResults();
+  }, []);
+  if (isLoading) {
+    return <CenteredLoader />;
+  }
   return (
     <ResultsTable>
       <ArchiveResultsHeader />
-      {archiveResults.map((result) => (
-        <ArchiveResult
-          id={result.id}
-          date={result.date}
-          configuration={result.configuration}
-          engineer={result.engineer}
-          technician={result.technician}
-        />
-      ))}
+      {!isLoading &&
+        archiveResults.map((result) => (
+          <ArchiveResult
+            id={result.id}
+            date={result.date}
+            configuration={result.configuration}
+            fullName={result.fullName}
+            office={result.office}
+          />
+        ))}
     </ResultsTable>
   );
 };
