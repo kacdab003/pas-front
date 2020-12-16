@@ -12,7 +12,12 @@ const NavbarItems = ({ onToggle }) => {
       <NavbarItem navIcon={homeIcon} title={'Home'} path={'/'} onToggle={onToggle} exact />
       <NavbarItem navIcon={addIcon} title={'Create new report'} onToggle={onToggle} path={'/new-report'} />
       <NavbarItem navIcon={archiveIcon} title={'Archive'} path={'/archive'} onToggle={onToggle} />
-      <NavbarItem navIcon={repairIcon} title={'Create repair report'} path={'/repair-report'} onToggle={onToggle} />
+      <NavbarItem
+        navIcon={repairIcon}
+        title={'Create repair report'}
+        path={'/new-exchange-report'}
+        onToggle={onToggle}
+      />
       <NavbarItem navIcon={logoutIcon} title={'Log out'} onToggle={onToggle} path={'/logout'} />
     </StyledNavbarItems>
   );
