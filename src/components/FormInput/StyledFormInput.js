@@ -16,8 +16,18 @@ export const StyledFormInput = styled.input`
   border: 1px solid black;
   border-radius: 5px;
   font-size: 1.1rem;
+  &::placeholder {
+    color: #ccc;
+  }
+  &[type='date'] {
+    font-family: inherit;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: center;
+  }
 `;
 
 export const StyledFormLabel = styled.label`
   padding: 0.5rem;
+  text-transform: uppercase;
 `;
