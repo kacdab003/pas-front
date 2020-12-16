@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-export const StyledExchangeReportForm = styled.div`
+export const StyledExchangeReportForm = styled.form`
   width: 100%;
-  height: 60%;
+  height: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
