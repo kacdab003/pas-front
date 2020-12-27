@@ -6,14 +6,15 @@ import exchangeReportConfig from '../../../shared/config/forms/exchangeReport';
 import { ExchangeReportFormWrapper, StyledExchangeReportForm } from './StyledExchangeReportForm';
 
 const ExchangeReportForm = ({ formProps }) => {
-  const inputs = exchangeReportConfig.inputs.map((input) => {
+  const inputs = exchangeReportConfig.inputs.map(({ type, name, required, placeholder, label }) => {
     const inputProps = {
-      type: input.type ? input.type : 'text',
-      name: input.name,
-      required: input.required,
-      placeholder: input.placeholder && input.placeholder,
+      type,
+      label,
+      name,
+      required,
+      placeholder,
     };
-    return <FormInput labelContent={input.label} inputProps={inputProps} />;
+    return <FormInput labelContent={label} inputProps={inputProps} />;
   });
   return (
     <ExchangeReportFormWrapper>
