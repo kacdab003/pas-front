@@ -1,6 +1,7 @@
 import React from 'react';
-import { EditButton } from './EditButton/EditButton';
+import { IconButton } from '../../IconButton/IconButton';
 import { ArchiveResultContainer, ArchiveResultElement } from './StyledArchiveResult';
+import editIcon from '../../../assets/icons/edit.png';
 
 const ArchiveResult = ({ id, date, configuration, fullName, office, editHandler }) => {
   return (
@@ -11,7 +12,7 @@ const ArchiveResult = ({ id, date, configuration, fullName, office, editHandler 
       <ArchiveResultElement>{fullName}</ArchiveResultElement>
       <ArchiveResultElement>{office}</ArchiveResultElement>
       <ArchiveResultElement>
-        <EditButton href={() => editHandler()} />
+        <IconButton src={editIcon} />
       </ArchiveResultElement>
     </ArchiveResultContainer>
   );

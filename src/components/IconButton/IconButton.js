@@ -1,12 +1,11 @@
 import styled from 'styled-components';
-import editIcon from '../../../../assets/icons/loupe.png';
 
-export const EditButton = styled.a`
+export const IconButton = styled.button`
   display: block;
   width: 1.5rem;
   height: 1.5rem;
   background-color: transparent;
-  background-image: url(${editIcon});
+  background-image: url(${(props) => props.src});
   background-size: cover;
   transition: ease-in-out 0.2s;
   outline: 0;
