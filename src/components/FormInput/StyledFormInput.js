@@ -25,6 +25,13 @@ export const StyledFormInput = styled.input`
     text-transform: uppercase;
     text-align: center;
   }
+  &[type='checkbox'] {
+    width: 2rem;
+    height: 2rem;
+    &:hover {
+      cursor: pointer;
+    }
+  }
 `;
 
 export const StyledFormLabel = styled.label`
