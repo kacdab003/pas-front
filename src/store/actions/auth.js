@@ -1,6 +1,7 @@
 import axios from 'axios';
-import urls from '../../shared/urls';
-import * as actionTypes from './actionsTypes';
+import { userAuthEndpoints } from '../../shared/config/endpoints';
+
+import * as actionTypes from './actionTypes';
 
 const authStart = () => {
   return { type: actionTypes.AUTH_START };
@@ -45,8 +46,8 @@ export const auth = (login, password, onSuccess) => {
   return async (dispatch) => {
     dispatch(authStart());
     try {
-      const authData = { username: login, password };
-      const response = await axios.post(urls.api + urls.login, authData, {
+      const authData = { login, password };
+      const response = await axios.post(userAuthEndpoints.login, authData, {
         headers: {
           'Content-Type': 'application/json',
         },
