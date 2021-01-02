@@ -6,3 +6,7 @@ export const LoginInputsContainer = styled.form`
   flex-direction: column;
   align-items: center;
 `;
+
+export const LoginErrorMessage = styled.p`
+  color: pink;
+`;

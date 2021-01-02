@@ -2,10 +2,10 @@ import React from 'react';
 import { ClipLoader } from 'react-spinners';
 import { StyledLoaderWrapper } from './StyledCenteredLoader';
 
-const CenteredLoader = () => {
+const CenteredLoader = ({ color, size }) => {
   return (
     <StyledLoaderWrapper>
-      <ClipLoader size={'100px'} />
+      <ClipLoader size={size} color={color} />
     </StyledLoaderWrapper>
   );
 };
