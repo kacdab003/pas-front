@@ -2,7 +2,8 @@ import React from 'react';
 import './index.css';
 import MainView from './Pages/MainView/MainView';
 import Layout from './containers/Layout';
-import { Redirect, Route } from 'react-router';
+import { Route } from 'react-router';
+import Logout from './components/Logout/Logout';
 import NewReport from './Pages/NewReport/NewReport';
 import Archive from './Pages/Archive/Archive';
 import NewExchangeReport from './Pages/NewExchangeReport/NewExchangeReport';
@@ -20,7 +21,7 @@ const App = () => {
         <Archive />
       </Route>
       <Route path={'/logout'}>
-        <Redirect to={'/'} />
+        <Logout />
       </Route>
       <Route path={'/'} exact>
         <MainView />

@@ -7,7 +7,7 @@ const Navbar = ({ isOpen, onToggle, isAuthenticated }) => {
   return (
     <StyledNavbar isOpen={isOpen}>
       <NavbarHeader isOpen={isOpen} onToggle={onToggle} title={'TITLE'} />
-      {!isAuthenticated ? <NavbarItems onToggle={onToggle} /> : <LoginSection />}
+      {isAuthenticated ? <NavbarItems onToggle={onToggle} /> : <LoginSection />}
     </StyledNavbar>
   );
 };
