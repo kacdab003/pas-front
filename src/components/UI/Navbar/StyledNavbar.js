@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export const StyledNavbar = styled.nav`
-  width: 32%;
+  min-width: 100px;
+  max-width: 32%;
   height: 100%;
   display: grid;
   position: fixed;

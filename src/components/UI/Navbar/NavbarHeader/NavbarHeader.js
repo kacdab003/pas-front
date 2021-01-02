@@ -4,7 +4,7 @@ import { StyledHamburger, StyledNavbarHeaderContainer, StyledPageTitle } from '.
 const NavbarHeader = ({ isOpen, onToggle, title }) => {
   return (
     <StyledNavbarHeaderContainer>
-      <StyledPageTitle>{title}</StyledPageTitle>
+      {isOpen ? <StyledPageTitle>{title}</StyledPageTitle> : <div />}
       <StyledHamburger color={'white'} isOpen={isOpen} menuClicked={onToggle} />
     </StyledNavbarHeaderContainer>
   );
