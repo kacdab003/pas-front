@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { auth } from '../../../store/actions/auth';
 import CenteredLoader from '../../UI/CenteredLoader/CenteredLoader';
 import { SmallActionButton } from '../../UI/Headers/Buttons';
-import LoginInput from './LoginInput/LoginInput';
-import { LoginErrorMessage, LoginInputsContainer } from './StyledLoginInputs';
+import LoginInput from './AuthInput/AuthInput';
+import { AuthErrorMessage, AuthInputsContainer } from './StyledAuthInputs';
 
-const LoginInputs = (props) => {
+const AuthInputs = (props) => {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const formSubmittedHandler = (event) => {
@@ -18,8 +18,8 @@ const LoginInputs = (props) => {
     setter(event.target.value);
   };
   return (
-    <LoginInputsContainer onSubmit={formSubmittedHandler}>
-      <LoginErrorMessage>{props.error}</LoginErrorMessage>
+    <AuthInputsContainer onSubmit={formSubmittedHandler}>
+      <AuthErrorMessage>{props.error}</AuthErrorMessage>
       <LoginInput placeholder={'Login'} required onChange={(event) => onInputChange(event, setLogin)} value={login} />
       <LoginInput
         placeholder={'Password'}
@@ -29,7 +29,7 @@ const LoginInputs = (props) => {
         value={password}
       />
       <SmallActionButton>{props.isLoading ? <CenteredLoader color="gray" size={'20px'} /> : 'LOGIN'}</SmallActionButton>
-    </LoginInputsContainer>
+    </AuthInputsContainer>
   );
 };
 
@@ -42,4 +42,4 @@ const mapStateToProps = (state) => ({
   error: state.auth.error,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginInputs);
+export default connect(mapStateToProps, mapDispatchToProps)(AuthInputs);

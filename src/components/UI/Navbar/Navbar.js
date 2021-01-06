@@ -1,5 +1,5 @@
 import React from 'react';
-import LoginSection from '../../LoginSection/LoginSection';
+import LoginSection from '../../AuthSection/AuthSection';
 import NavbarHeader from './NavbarHeader/NavbarHeader';
 import NavbarItems from './NavbarItems/NavbarItems';
 import { StyledNavbar } from './StyledNavbar';
