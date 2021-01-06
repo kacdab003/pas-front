@@ -10,9 +10,10 @@ export const StyledAuthInput = styled.input`
   color: white;
   margin: 1rem;
   font-weight: lighter;
-  ::-webkit-input-placeholder {
+  &::placeholder {
+    font-family: 'Roboto', sans-serif;
     color: #ccc;
-    font-weight: 50;
+    font-weight: 300;
     font-size: 1rem;
   }
 `;
