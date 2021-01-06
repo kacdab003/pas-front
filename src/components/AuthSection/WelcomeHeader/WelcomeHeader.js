@@ -1,13 +1,13 @@
 import React from 'react';
 import { Highlight, MainNavHeader } from '../../UI/Headers/Headers';
-import { LoginHeaderContainer } from './StyledLoginHeader';
+import { StyledWelcomeHeaderContainer } from './StyledWelcomeHeader';
 
 const LoginHeader = () => {
   return (
-    <LoginHeaderContainer>
+    <StyledWelcomeHeaderContainer>
       <MainNavHeader>Welcome!</MainNavHeader>
       <Highlight>Sign in to your account</Highlight>
-    </LoginHeaderContainer>
+    </StyledWelcomeHeaderContainer>
   );
 };
 

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledLoginInput = styled.input`
+export const StyledAuthInput = styled.input`
   background-color: rgba(255, 255, 255, 0.3);
   width: 60%;
   height: 3rem;
