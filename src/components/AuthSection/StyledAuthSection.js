@@ -3,8 +3,8 @@ import styled from 'styled-components';
 export const AuthSectionContainer = styled.div`
   width: 100%;
   display: grid;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: 1fr 2fr;
   height: 100%;
-  align-content: center;
-  justify-items: center;
+  justify-content: center;
+  align-items: center;
 `;
