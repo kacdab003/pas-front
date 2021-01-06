@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import Navbar from '../components/UI/Navbar/Navbar';
 import { authCheckState } from '../store/actions';
@@ -6,7 +6,7 @@ import { StyledContainer, StyledLayout } from './StyledLayout';
 
 const Layout = (props) => {
   const [isModalOpened, setIsModalOpened] = useState(false);
-  useEffect(() => {});
+  console.log(props.isAuthenticated);
   const toggleModalHandler = () => {
     setIsModalOpened((isOpened) => !isOpened);
   };
