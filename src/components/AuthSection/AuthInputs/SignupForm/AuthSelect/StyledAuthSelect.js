@@ -7,12 +7,5 @@ export const StyledAuthSelect = styled.select`
   border: white 1px solid;
   border-radius: 5px;
   color: #ccc;
-
   margin: 1rem;
-
-  &::placeholder {
-    color: #ccc;
-    font-weight: lighter;
-    font-size: 1rem;
-  }
 `;
