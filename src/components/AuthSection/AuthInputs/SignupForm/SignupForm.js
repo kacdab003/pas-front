@@ -1,18 +1,72 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { userAuthEndpoints } from '../../../../shared/config/endpoints';
+import { auth } from '../../../../store/actions';
 import { SmallActionButton } from '../../../UI/Headers/Buttons';
 import AuthInput from '../AuthInput/AuthInput';
+import { AuthErrorMessage } from '../StyledAuthInputs';
+import AuthSelect from './AuthSelect/AuthSelect';
 import { StyledSignupFormContainer } from './StyledSignupForm';
 
-const SignupForm = () => {
+const SignupForm = (props) => {
+  const [login, setLogin] = useState('');
+  const [name, setName] = useState('');
+  const [surname, setSurname] = useState('');
+  const [position, setPosition] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState(null);
+
+  const onSignup = async (event) => {
+    event.preventDefault();
+    try {
+      const authData = {
+        login,
+        name,
+        surname,
+        position,
+        password,
+      };
+      await axios.put(userAuthEndpoints.signUp, authData, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      setError('');
+      props.onAuth(login, password);
+    } catch (error) {
+      setError(error?.response?.data?.error || 'Unknown error');
+    }
+  };
+  const onInputChange = (event, setter) => {
+    setter(event.target.value);
+  };
+
   return (
-    <StyledSignupFormContainer>
-      <AuthInput />
-      <AuthInput />
-      <AuthInput />
-      <AuthInput />
-      <SmallActionButton>SIGN UP</SmallActionButton>
+    <StyledSignupFormContainer onSubmit={onSignup}>
+      '<AuthErrorMessage>{error}</AuthErrorMessage>
+      <AuthInput onChange={(event) => onInputChange(event, setLogin)} value={login} placeholder="Login" />
+      <AuthInput placeholder="Name" onChange={(event) => onInputChange(event, setName)} value={name} />
+      <AuthInput placeholder="Surname" onChange={(event) => onInputChange(event, setSurname)} value={surname} />
+      <AuthInput
+        placeholder={'Password'}
+        type="password"
+        onChange={(event) => onInputChange(event, setPassword)}
+        value={password}
+      />
+      <AuthInput
+        placeholder={'Confirm password'}
+        type="password"
+        onChange={(event) => onInputChange(event, setConfirmPassword)}
+        value={confirmPassword}
+      />
+      <AuthSelect onChange={(event) => onInputChange(event, setPosition)} value={position} />
+      <SmallActionButton type="submit">SIGN UP</SmallActionButton>
     </StyledSignupFormContainer>
   );
 };
-
-export default SignupForm;
+const mapDispatchToProps = (dispatch) => ({
+  onAuth: (login, password) => dispatch(auth(login, password)),
+});
+export default connect(null, mapDispatchToProps)(SignupForm);

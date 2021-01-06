@@ -1,18 +1,18 @@
 import styled from 'styled-components';
 
-export const StyledAuthInput = styled.input`
+export const StyledAuthSelect = styled.select`
   background-color: rgba(255, 255, 255, 0.3);
   width: 60%;
-  height: 2rem;
+  height: 1.5rem;
   border: white 1px solid;
   border-radius: 5px;
-  padding: 0.5rem;
-  color: white;
+  color: #ccc;
+
   margin: 1rem;
-  font-weight: lighter;
-  ::-webkit-input-placeholder {
+
+  &::placeholder {
     color: #ccc;
-    font-weight: 50;
+    font-weight: lighter;
     font-size: 1rem;
   }
 `;
