@@ -3,12 +3,14 @@ import { connect } from 'react-redux';
 import { auth } from '../../../store/actions/auth';
 import CenteredLoader from '../../UI/CenteredLoader/CenteredLoader';
 import { SmallActionButton } from '../../UI/Headers/Buttons';
+import AuthSwitch from '../AuthSwitch/AuthSwitch';
 import LoginInput from './AuthInput/AuthInput';
 import { AuthErrorMessage, AuthInputsContainer } from './StyledAuthInputs';
 
 const AuthInputs = (props) => {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
+  const [isSignup, setIsSignup] = useState(false);
   const formSubmittedHandler = (event) => {
     event.preventDefault();
     props.onAuth(login, password);
@@ -29,6 +31,7 @@ const AuthInputs = (props) => {
         value={password}
       />
       <SmallActionButton>{props.isLoading ? <CenteredLoader color="gray" size={'20px'} /> : 'LOGIN'}</SmallActionButton>
+      <AuthSwitch isSignup={isSignup} setIsSignup={setIsSignup} />
     </AuthInputsContainer>
   );
 };
