@@ -16,6 +16,7 @@ const ExchangeReportForm = ({ formProps }) => {
     };
     return <FormInput labelContent={label} inputProps={inputProps} />;
   });
+
   return (
     <ExchangeReportFormWrapper>
       <StyledExchangeReportForm>{inputs}</StyledExchangeReportForm>
