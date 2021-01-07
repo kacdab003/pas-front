@@ -4,3 +4,7 @@ export const userAuthEndpoints = {
   login: API_URL + '/login',
   signUp: API_URL + '/signup',
 };
+
+export const archiveEndpoints = {
+  get: API_URL + '/archive',
+};
