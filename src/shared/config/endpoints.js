@@ -6,5 +6,5 @@ export const userAuthEndpoints = {
 };
 
 export const archiveEndpoints = {
-  get: API_URL + '/archive',
+  get: API_URL + '/reports',
 };
