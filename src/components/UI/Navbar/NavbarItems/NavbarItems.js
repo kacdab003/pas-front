@@ -14,7 +14,7 @@ const NavbarItems = ({ onToggle }) => {
       <NavbarItem navIcon={archiveIcon} title={'Archive'} path={'/archive'} onToggle={onToggle} />
       <NavbarItem
         navIcon={repairIcon}
-        title={'Create repair report'}
+        title={'Create exchange report'}
         path={'/new-exchange-report'}
         onToggle={onToggle}
       />
