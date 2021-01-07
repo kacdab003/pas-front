@@ -8,3 +8,7 @@ export const userAuthEndpoints = {
 export const archiveEndpoints = {
   get: API_URL + '/reports',
 };
+
+export const exchangeReportEndpoints = {
+  post: API_URL + '/exchangeReports',
+};
