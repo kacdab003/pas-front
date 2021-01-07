@@ -6,12 +6,23 @@ const exchangeReportConfig = {
       type: 'date',
       required: true,
     },
-    { label: 'Inżynier', type: 'text', placeholder: 'Imię i nazwisko inżyniera', required: true },
-    { label: 'Technik', type: 'text', placeholder: 'Imię i nazwisko technika', required: true },
-    { label: 'Numer obiektu', type: 'number', required: true },
-    { label: 'Gniazdo', type: 'number', placeholder: '', required: true },
-    { label: 'Nr ewidencyjny uszkodzonego modułu', type: 'text', placeholder: '', required: true },
-    { label: 'Nr ewidencyjny nowego modułu', type: 'text', placeholder: '', required: true },
+    { label: 'Numer obiektu', name: 'objectNumber', type: 'number', required: true },
+    { label: 'Gniazdo', name: 'socket', type: 'number', placeholder: '', required: true },
+  ],
+  selects: [
+    {
+      label: 'Pracownik dokonujący wymiany',
+      name: 'exchangeWorker',
+      placeholder: 'Imię i nazwisko pracownika',
+      required: true,
+    },
+    {
+      label: 'Nr ewidencyjny uszkodzonego modułu',
+      name: 'damagedModule',
+      placeholder: '',
+      required: true,
+    },
+    { label: 'Nr ewidencyjny nowego modułu', name: 'newModule', placeholder: '', required: true },
   ],
 };
 

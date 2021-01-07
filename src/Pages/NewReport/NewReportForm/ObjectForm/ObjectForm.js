@@ -5,13 +5,18 @@ import generateInputsFromConfig from '../../../../shared/config/forms/generateIn
 import newReportForms from '../../../../shared/config/forms/newReport';
 import { StyledObjectForm } from './StyledObjectForm';
 
-const ObjectForm = () => {
+const ObjectForm = (props) => {
+  const handler = (event) => {
+    event.preventDefault();
+    return alert('TEST');
+  };
+
   return (
     <div>
       <SecondaryHeader>Obiekty</SecondaryHeader>
       <StyledObjectForm>
         {generateInputsFromConfig(newReportForms.objectForm)}
-        <SubmitButton title={'Dodaj'} />
+        <SubmitButton title={'Dodaj'} buttonProps={{ onClick: handler }} />
       </StyledObjectForm>
     </div>
   );
