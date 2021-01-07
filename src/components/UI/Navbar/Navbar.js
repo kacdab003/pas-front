@@ -6,7 +6,7 @@ import { StyledNavbar } from './StyledNavbar';
 const Navbar = ({ isOpen, onToggle, isAuthenticated }) => {
   let navbarContent;
   if (isOpen) {
-    navbarContent = !isAuthenticated ? <NavbarItems onToggle={onToggle} /> : <AuthSection />;
+    navbarContent = isAuthenticated ? <NavbarItems onToggle={onToggle} /> : <AuthSection />;
   }
   return (
     <StyledNavbar isOpen={isOpen}>
