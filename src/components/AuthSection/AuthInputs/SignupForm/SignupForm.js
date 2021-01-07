@@ -45,7 +45,7 @@ const SignupForm = (props) => {
 
   return (
     <StyledSignupFormContainer onSubmit={onSignup}>
-      '<AuthErrorMessage>{error}</AuthErrorMessage>
+      <AuthErrorMessage>{error}</AuthErrorMessage>
       <AuthInput onChange={(event) => onInputChange(event, setLogin)} value={login} placeholder="Login" />
       <AuthInput placeholder="Name" onChange={(event) => onInputChange(event, setName)} value={name} />
       <AuthInput placeholder="Surname" onChange={(event) => onInputChange(event, setSurname)} value={surname} />
