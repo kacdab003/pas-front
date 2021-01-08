@@ -6,7 +6,7 @@ import ArchiveResultsHeader from './ArchiveResultsHeader/ArchiveResultsHeader';
 import { ResultsTable } from './StyledArchiveResults';
 import moment from 'moment';
 import { archiveEndpoints } from '../../shared/config/endpoints';
-import ArchiveResultsError from './ArchiveResultsError/ArchiveResultsError';
+import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 
 const ArchiveResults = () => {
   const [archiveResults, setArchiveResults] = useState([]);
@@ -40,7 +40,7 @@ const ArchiveResults = () => {
     return <CenteredLoader />;
   }
   if (error) {
-    return <ArchiveResultsError message={'Błąd wczytywania danych!'} />;
+    return <ErrorMessage message={'Błąd wczytywania danych!'} />;
   }
   return (
     <ResultsTable>

@@ -5,10 +5,13 @@ export const ErrorMessageWrapper = styled.div`
   border: 1px solid red;
   padding: 0.5rem;
   border-radius: 5px;
+  max-width: 30rem;
+  text-align: center;
+  margin: auto;
 `;
 
 export const StyledErrorMessage = styled.p`
   color: black;
   font-weight: bold;
-  font-size: 2rem;
+  font-size: 1.5rem;
 `;
