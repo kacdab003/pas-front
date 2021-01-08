@@ -18,5 +18,5 @@ export const moduleEndpoints = {
 };
 
 export const userEndpoints = {
-  get: API_URL + '/users',
+  get: API_URL + '/workers',
 };
