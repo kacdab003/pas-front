@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import FormInput from '../../../components/FormInput/FormInput';
 import SubmitButton from '../../../components/SubmitButton/SubmitButton';
 import SeparateLine from '../../../components/UI/SeparateLine/SeparateLine';
@@ -9,27 +9,34 @@ import { exchangeReportEndpoints } from '../../../shared/config/endpoints';
 import FormSelect from '../../../components/FormSelect/FormSelect';
 import ErrorMessage from '../../../components/ErrorMessage/ErrorMessage';
 
-const ExchangeReportForm = ({ formProps }) => {
+const ExchangeReportForm = () => {
   const [formData, changeFormData] = useState({});
   const [error, setError] = useState(false);
   const [selects, setSelects] = useState([]);
 
-  const inputChangedHandler = (event) => {
+  const saveData = useCallback(async () => {
+    const data = {
+      ...formData,
+    };
+    try {
+      await Axios.post(exchangeReportEndpoints.post, data);
+    } catch (error) {
+      setError(error.response.data);
+    }
+  }, [formData]);
+
+  const formSubmitHandler = useCallback(
+    (event) => {
+      event.preventDefault();
+      saveData();
+    },
+    [saveData]
+  );
+
+  const inputChangedHandler = useCallback((event) => {
     event.preventDefault();
     changeFormData((prevState) => ({ ...prevState, [event.target.name]: event.target.value }));
-  };
-
-  const inputs = exchangeReportConfig.inputs.map(({ type, name, required, placeholder, label }) => {
-    const inputProps = {
-      type,
-      label,
-      name,
-      required,
-      placeholder,
-      onChange: inputChangedHandler,
-    };
-    return <FormInput key={label} labelContent={label} inputProps={inputProps} />;
-  });
+  }, []);
 
   useEffect(() => {
     exchangeReportConfig.inputs.forEach((input) => changeFormData((prevState) => ({ ...prevState, [input.name]: '' })));
@@ -59,24 +66,19 @@ const ExchangeReportForm = ({ formProps }) => {
     );
 
     setSelects(selectsFromConfig);
-  }, []);
+  }, [inputChangedHandler]);
 
-  const saveData = async () => {
-    const data = {
-      ...formData,
+  const inputs = exchangeReportConfig.inputs.map(({ type, name, required, placeholder, label }) => {
+    const inputProps = {
+      type,
+      label,
+      name,
+      required,
+      placeholder,
+      onChange: inputChangedHandler,
     };
-
-    try {
-      await Axios.post(exchangeReportEndpoints.post, data);
-    } catch (error) {
-      setError(error.response.data);
-    }
-  };
-
-  const formSubmitHandler = (event) => {
-    event.preventDefault();
-    saveData();
-  };
+    return <FormInput key={label} labelContent={label} inputProps={inputProps} />;
+  });
 
   if (error) {
     return (
