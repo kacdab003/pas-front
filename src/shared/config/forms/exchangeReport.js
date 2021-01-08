@@ -13,6 +13,7 @@ const exchangeReportConfig = {
   ],
   selects: [
     {
+      defaultOptionLabel: 'Wybierz pracownika',
       label: 'Pracownik dokonujący wymiany',
       name: 'exchangeWorker',
       required: true,
@@ -20,6 +21,7 @@ const exchangeReportConfig = {
       refKey: 'surname',
     },
     {
+      defaultOptionLabel: 'Wybierz moduł',
       label: 'Nr ewidencyjny uszkodzonego modułu',
       name: 'damagedModule',
       required: true,
@@ -27,6 +29,7 @@ const exchangeReportConfig = {
       refKey: 'moduleNumber',
     },
     {
+      defaultOptionLabel: 'Wybierz moduł',
       label: 'Nr ewidencyjny nowego modułu',
       name: 'newModule',
       required: true,
