@@ -12,3 +12,11 @@ export const archiveEndpoints = {
 export const exchangeReportEndpoints = {
   post: API_URL + '/exchangeReports',
 };
+
+export const moduleEndpoints = {
+  get: API_URL + '/modules',
+};
+
+export const userEndpoints = {
+  get: API_URL + '/users',
+};
