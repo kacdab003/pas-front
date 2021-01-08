@@ -4,7 +4,7 @@ import { StyledErrorMessage, ErrorMessageWrapper } from './StyledErrorMessage';
 const ErrorMessage = ({ message }) => {
   return (
     <ErrorMessageWrapper>
-      <StyledErrorMessage>{message}</StyledErrorMessage>
+      <StyledErrorMessage>{message ? message : 'Coś poszło nie tak...'}</StyledErrorMessage>
     </ErrorMessageWrapper>
   );
 };

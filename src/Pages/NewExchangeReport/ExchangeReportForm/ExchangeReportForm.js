@@ -83,7 +83,7 @@ const ExchangeReportForm = () => {
   if (error) {
     return (
       <ExchangeReportFormWrapper>
-        <ErrorMessage message={'Coś poszło nie tak...'} />
+        <ErrorMessage message={error.message} />
       </ExchangeReportFormWrapper>
     );
   }
