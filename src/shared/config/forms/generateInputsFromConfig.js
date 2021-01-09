@@ -8,7 +8,7 @@ const generateInputsFromConfig = (inputArray) => {
       required: required,
       placeholder: placeholder && placeholder,
     };
-    return <FormInput labelContent={label} inputProps={inputProps} />;
+    return <FormInput key={name} labelContent={label} inputProps={inputProps} />;
   });
 };
 

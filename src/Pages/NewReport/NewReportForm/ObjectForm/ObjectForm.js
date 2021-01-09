@@ -7,21 +7,25 @@ import { StyledObjectForm, StyledObjectParagraph } from './StyledObjectForm';
 import FormSelect from '../../../../components/FormSelect/FormSelect';
 
 const ObjectForm = (props) => {
-  const [object, setObject] = useState({});
+  const [existingObject, setExistingObject] = useState({});
+  const [newObject, setNewObject] = useState({});
   const [error, setError] = useState(false);
 
   const addExistingObjectHandler = (event) => {
     event.preventDefault();
+    props.changeObjects(existingObject);
     return console.log('Add existing object');
   };
 
   const addNewObjectHandler = (event) => {
     event.preventDefault();
+    props.changeObjects(newObject);
     return console.log('Add new object');
   };
 
   const selectChangedHandler = (event) => {
     event.preventDefault();
+    setExistingObject(event.target.value);
     return console.log('SELECT CHANGED');
   };
 

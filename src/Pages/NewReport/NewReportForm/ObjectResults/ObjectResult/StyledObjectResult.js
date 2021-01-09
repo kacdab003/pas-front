@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 export const StyledObjectResult = styled.div`
-  width: 60%;
+  width: 70%;
   height: 4rem;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr;
   justify-content: center;
   align-items: center;
