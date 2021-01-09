@@ -7,3 +7,9 @@ export const StyledObjectForm = styled.form`
   align-content: center;
   justify-items: center;
 `;
+
+export const StyledObjectParagraph = styled.p`
+  text-align: center;
+  margin: 30px auto;
+  text-transform: uppercase;
+`;
