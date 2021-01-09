@@ -1,3 +1,5 @@
+import { objectEndpoints } from '../endpoints';
+
 const newReportForms = {
   firstSection: [
     {
@@ -8,10 +10,17 @@ const newReportForms = {
       required: true,
     },
     {
-      label: 'pracownik',
-      name: 'worker',
+      label: 'inżynier',
+      name: 'engineer',
       type: 'text',
-      placeholder: 'Imię i nazwisko pracownika',
+      placeholder: 'Imię i nazwisko inżyniera',
+      required: true,
+    },
+    {
+      label: 'technik',
+      name: 'technician',
+      type: 'text',
+      placeholder: 'Imię i nazwisko technika',
       required: true,
     },
   ],
@@ -75,6 +84,14 @@ const newReportForms = {
       required: false,
     },
   ],
+  objectFormSelector: {
+    label: '',
+    name: 'name',
+    defaultOptionLabel: 'Wybierz obiekt',
+    refEndpoint: objectEndpoints.get,
+    refKey: 'name',
+    required: false,
+  },
 };
 
 export default newReportForms;
