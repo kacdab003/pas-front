@@ -9,17 +9,17 @@ import { StyledNavbarItems } from './StyledNavbarItems';
 const NavbarItems = ({ onToggle }) => {
   return (
     <StyledNavbarItems>
-      <NavbarItem navIcon={homeIcon} title={'Home'} path={'/'} onToggle={onToggle} exact />
-      <NavbarItem navIcon={addIcon} title={'Create new report'} onToggle={onToggle} path={'/new-report'} />
-      <NavbarItem navIcon={archiveIcon} title={'Archive'} path={'/archive'} onToggle={onToggle} />
+      <NavbarItem navIcon={homeIcon} title={'Strona główna'} path={'/'} onToggle={onToggle} exact />
+      <NavbarItem navIcon={addIcon} title={'Stwórz nowy raport'} onToggle={onToggle} path={'/new-report'} />
+      <NavbarItem navIcon={archiveIcon} title={'Archiwum'} path={'/archive'} onToggle={onToggle} />
       <NavbarItem
         navIcon={repairIcon}
-        title={'Create exchange report'}
+        title={'Stwórz raport wymiany'}
         path={'/new-exchange-report'}
         onToggle={onToggle}
       />
       <NavbarItem navIcon={null} title={'Dodaj obiekt'} path={'/new-object'} onToggle={onToggle} />
-      <NavbarItem navIcon={logoutIcon} title={'Log out'} onToggle={onToggle} path={'/logout'} />
+      <NavbarItem navIcon={logoutIcon} title={'Wyloguj'} onToggle={onToggle} path={'/logout'} />
     </StyledNavbarItems>
   );
 };

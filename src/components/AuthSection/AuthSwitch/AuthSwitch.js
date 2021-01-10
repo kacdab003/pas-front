@@ -6,8 +6,8 @@ const AuthSwitch = ({ isSignup, setIsSignup }) => {
     event.preventDefault();
     setIsSignup(!isSignup);
   };
-  const buttonContent = isSignup ? 'LOGIN' : 'SIGNUP';
-  return <StyledAuthSwitch onClick={authSwitchedHandler}>Switch to {buttonContent}</StyledAuthSwitch>;
+  const buttonContent = isSignup ? 'Zaloguj się' : 'Zarejestruj się';
+  return <StyledAuthSwitch onClick={authSwitchedHandler}>{buttonContent}</StyledAuthSwitch>;
 };
 
 export default AuthSwitch;

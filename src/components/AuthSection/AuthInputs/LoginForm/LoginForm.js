@@ -24,13 +24,15 @@ const LoginForm = (props) => {
       <AuthErrorMessage>{props.error}</AuthErrorMessage>
       <AuthInput placeholder={'Login'} required onChange={(event) => onInputChange(event, setLogin)} value={login} />
       <AuthInput
-        placeholder={'Password'}
+        placeholder={'Hasło'}
         type={'password'}
         required
         onChange={(event) => onInputChange(event, setPassword)}
         value={password}
       />
-      <SmallActionButton>{props.isLoading ? <CenteredLoader color="gray" size={'20px'} /> : 'LOGIN'}</SmallActionButton>
+      <SmallActionButton>
+        {props.isLoading ? <CenteredLoader color="gray" size={'20px'} /> : 'ZALOGUJ'}
+      </SmallActionButton>
     </LoginFormContainer>
   );
 };

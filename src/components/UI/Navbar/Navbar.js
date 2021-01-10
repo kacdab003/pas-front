@@ -10,7 +10,7 @@ const Navbar = ({ isOpen, onToggle, isAuthenticated }) => {
   }
   return (
     <StyledNavbar isOpen={isOpen}>
-      <NavbarHeader isOpen={isOpen} onToggle={onToggle} title={'TITLE'} />
+      <NavbarHeader isOpen={isOpen} onToggle={onToggle} title={'MENU'} />
       {navbarContent}
     </StyledNavbar>
   );

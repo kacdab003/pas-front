@@ -47,22 +47,22 @@ const SignupForm = (props) => {
     <StyledSignupFormContainer onSubmit={onSignup}>
       <AuthErrorMessage>{error}</AuthErrorMessage>
       <AuthInput onChange={(event) => onInputChange(event, setLogin)} value={login} placeholder="Login" />
-      <AuthInput placeholder="Name" onChange={(event) => onInputChange(event, setName)} value={name} />
-      <AuthInput placeholder="Surname" onChange={(event) => onInputChange(event, setSurname)} value={surname} />
+      <AuthInput placeholder="Imię" onChange={(event) => onInputChange(event, setName)} value={name} />
+      <AuthInput placeholder="Nazwisko" onChange={(event) => onInputChange(event, setSurname)} value={surname} />
       <AuthInput
-        placeholder={'Password'}
+        placeholder={'Hasło'}
         type="password"
         onChange={(event) => onInputChange(event, setPassword)}
         value={password}
       />
       <AuthInput
-        placeholder={'Confirm password'}
+        placeholder={'Potwierdź hasło'}
         type="password"
         onChange={(event) => onInputChange(event, setConfirmPassword)}
         value={confirmPassword}
       />
       <AuthSelect onChange={(event) => onInputChange(event, setPosition)} value={position} />
-      <SmallActionButton type="submit">SIGN UP</SmallActionButton>
+      <SmallActionButton type="submit">STWÓRZ KONTO</SmallActionButton>
     </StyledSignupFormContainer>
   );
 };
