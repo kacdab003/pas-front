@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { FormSectionWrapper } from './StyledNewReportForm';
 import newReportForms from '../../../shared/config/forms/newReport';
 import SeparateLine from '../../../components/UI/SeparateLine/SeparateLine';
@@ -13,9 +13,9 @@ const NewReportForm = () => {
     changeObjectIDs((prevState) => [...prevState, object]);
   };
 
-  const passDetailedObjectsHandler = (passedObjects) => {
+  const passDetailedObjectsHandler = useCallback((passedObjects) => {
     changeDetailedObjects((prevState) => [...prevState, passedObjects]);
-  };
+  }, []);
 
   return (
     <form>

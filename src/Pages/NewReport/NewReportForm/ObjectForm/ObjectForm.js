@@ -1,26 +1,22 @@
 import React, { useState } from 'react';
 import SubmitButton from '../../../../components/SubmitButton/SubmitButton';
 import { SecondaryHeader } from '../../../../components/UI/Headers/Headers';
-import generateInputsFromConfig from '../../../../shared/config/forms/generateInputsFromConfig';
 import newReportForms from '../../../../shared/config/forms/newReport';
 import { StyledObjectForm, StyledObjectParagraph } from './StyledObjectForm';
 import FormSelect from '../../../../components/FormSelect/FormSelect';
 
 const ObjectForm = (props) => {
   const [existingObject, setExistingObject] = useState({});
-  const [newObject, setNewObject] = useState({});
   const [error, setError] = useState(false);
 
   const addExistingObjectHandler = (event) => {
     event.preventDefault();
     props.changeObjects(existingObject);
-    console.log('Add existing object');
   };
 
   const selectChangedHandler = (event) => {
     event.preventDefault();
     setExistingObject(event.target.value);
-    console.log('SELECT CHANGED');
   };
 
   return (

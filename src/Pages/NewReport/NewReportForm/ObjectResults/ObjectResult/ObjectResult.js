@@ -7,7 +7,6 @@ import FormInput from '../../../../../components/FormInput/FormInput';
 
 const ObjectResult = ({ id, name, t1Value, t2Value, t3Value, c1Value, damagedModules, updateObjectValuesHandler }) => {
   const updateObjectValues = (event) => {
-    console.log(event.target.name, event.target.value, id);
     updateObjectValuesHandler(event.target.name, event.target.value, id);
   };
   return (
@@ -17,8 +16,8 @@ const ObjectResult = ({ id, name, t1Value, t2Value, t3Value, c1Value, damagedMod
         key={id + 't1'}
         labelContent="T1"
         inputProps={{
-          type: 'text',
-          name: 't1Value',
+          type: 'number',
+          name: 'T1',
           required: true,
           placeholder: 'T1',
           defaultValue: t1Value,
@@ -29,8 +28,8 @@ const ObjectResult = ({ id, name, t1Value, t2Value, t3Value, c1Value, damagedMod
         key={id + 't2'}
         labelContent="T2"
         inputProps={{
-          type: 'text',
-          name: 't2Value',
+          type: 'number',
+          name: 'T2',
           required: true,
           placeholder: 'T2',
           defaultValue: t2Value,
@@ -41,8 +40,8 @@ const ObjectResult = ({ id, name, t1Value, t2Value, t3Value, c1Value, damagedMod
         key={id + 't3'}
         labelContent="T3"
         inputProps={{
-          type: 'text',
-          name: 't3Value',
+          type: 'number',
+          name: 'T3',
           required: true,
           placeholder: 'T3',
           defaultValue: t3Value,
@@ -53,8 +52,8 @@ const ObjectResult = ({ id, name, t1Value, t2Value, t3Value, c1Value, damagedMod
         key={id + 'c1'}
         labelContent="C1"
         inputProps={{
-          type: 'text',
-          name: 'c1Value',
+          type: 'number',
+          name: 'C1',
           required: true,
           placeholder: 'C1',
           defaultValue: c1Value,
@@ -63,7 +62,6 @@ const ObjectResult = ({ id, name, t1Value, t2Value, t3Value, c1Value, damagedMod
       />
 
       <StyledObjectOptions>
-        <IconButton src={deleteIcon} />
         <IconButton src={deleteIcon} />
         <IconButton src={settingsIcon} />
       </StyledObjectOptions>
