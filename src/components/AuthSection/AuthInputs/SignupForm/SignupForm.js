@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../../../../axios';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { userAuthEndpoints } from '../../../../shared/config/endpoints';
@@ -28,11 +28,7 @@ const SignupForm = (props) => {
         position,
         password,
       };
-      await axios.put(userAuthEndpoints.signUp, authData, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      await axios.put(userAuthEndpoints.signUp, authData);
       setError('');
       props.onAuth(login, password);
     } catch (error) {

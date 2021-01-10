@@ -1,4 +1,4 @@
-import Axios from 'axios';
+import axios from '../../axios';
 import React, { useEffect, useState } from 'react';
 import { StyledFormSelect, StyledFormLabel, StyledSelectWrapper } from './StyledFormSelect';
 
@@ -7,7 +7,7 @@ const FormSelect = ({ defaultOptionLabel, labelContent, selectProps, refEndpoint
   useEffect(() => {
     const fetchOptions = async () => {
       try {
-        const response = await Axios.get(refEndpoint);
+        const response = await axios.get(refEndpoint);
 
         const options = response.data.map((op) => {
           return (

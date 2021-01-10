@@ -4,7 +4,7 @@ import SubmitButton from '../../../components/SubmitButton/SubmitButton';
 import SeparateLine from '../../../components/UI/SeparateLine/SeparateLine';
 import exchangeReportConfig from '../../../shared/config/forms/exchangeReport';
 import { ExchangeReportFormWrapper, StyledExchangeReportForm } from './StyledExchangeReportForm';
-import Axios from 'axios';
+import axios from '../../../axios';
 import { exchangeReportEndpoints } from '../../../shared/config/endpoints';
 import FormSelect from '../../../components/FormSelect/FormSelect';
 import ErrorMessage from '../../../components/ErrorMessage/ErrorMessage';
@@ -19,7 +19,7 @@ const ExchangeReportForm = () => {
       ...formData,
     };
     try {
-      await Axios.post(exchangeReportEndpoints.post, data);
+      await axios.post(exchangeReportEndpoints.post, data);
     } catch (error) {
       setError(error.response.data);
     }
