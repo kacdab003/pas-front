@@ -3,27 +3,22 @@ import './index.css';
 import MainView from './Pages/MainView/MainView';
 import Layout from './containers/Layout';
 import { Route, Switch } from 'react-router';
-import Logout from './components/Logout/Logout';
-import NewReport from './Pages/NewReport/NewReport';
-import Archive from './Pages/Archive/Archive';
-import NewExchangeReport from './Pages/NewExchangeReport/NewExchangeReport';
-import NewObject from './Pages/NewObject/NewObject';
 import NotFound from './Pages/NotFound/NotFound';
+import { connect } from 'react-redux';
+import AuthRoutes from './components/AuthRoutes/AuthRoutes';
 
-const App = () => {
+const App = (props) => {
   return (
     <Layout>
       <Switch>
-        <Route path={'/new-report'} component={NewReport} />
-        <Route path={'/new-exchange-report'} component={NewExchangeReport} />
-        <Route path={'/new-object'} component={NewObject} />
-        <Route path={'/archive'} component={Archive} />
-        <Route path={'/logout'} component={Logout} />
         <Route path={'/'} exact component={MainView} />
+        {props.isAuthenticated && <AuthRoutes />}
         <Route component={NotFound} />
       </Switch>
     </Layout>
   );
 };
-
-export default App;
+const mapStateToProps = (state) => ({
+  isAuthenticated: !!state.auth.token,
+});
+export default connect(mapStateToProps, null)(App);
