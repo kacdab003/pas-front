@@ -17,7 +17,7 @@ const FormSelect = ({ defaultOptionLabel, labelContent, selectProps, refEndpoint
           );
         });
         const defaultOption = (
-          <option value="" key={'DEFAULT'} disabled>
+          <option value="" key={'DEFAULT'} selected disabled>
             {defaultOptionLabel}
           </option>
         );
@@ -33,9 +33,7 @@ const FormSelect = ({ defaultOptionLabel, labelContent, selectProps, refEndpoint
   return (
     <StyledSelectWrapper>
       <StyledFormLabel>{labelContent}</StyledFormLabel>
-      <StyledFormSelect defaultValue="" {...selectProps}>
-        {options}
-      </StyledFormSelect>
+      <StyledFormSelect {...selectProps}>{options}</StyledFormSelect>
     </StyledSelectWrapper>
   );
 };

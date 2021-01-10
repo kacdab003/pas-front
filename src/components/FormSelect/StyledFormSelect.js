@@ -16,11 +16,11 @@ export const StyledFormLabel = styled.label`
 
 export const StyledFormSelect = styled.select`
   width: 80%;
-  padding: 1rem;
+  padding: 0.5rem;
   height: 3rem;
   border: 1px solid black;
   border-radius: 5px;
-  font-size: 1.1rem;
+  font-size: 1rem;
   option {
     color: black;
     background: white;
