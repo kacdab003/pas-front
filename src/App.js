@@ -7,6 +7,7 @@ import Logout from './components/Logout/Logout';
 import NewReport from './Pages/NewReport/NewReport';
 import Archive from './Pages/Archive/Archive';
 import NewExchangeReport from './Pages/NewExchangeReport/NewExchangeReport';
+import NewObject from './Pages/NewObject/NewObject';
 
 const App = () => {
   return (
@@ -16,6 +17,9 @@ const App = () => {
       </Route>
       <Route path={'/new-exchange-report'}>
         <NewExchangeReport />
+      </Route>
+      <Route path={'/new-object'}>
+        <NewObject />
       </Route>
       <Route path={'/archive'}>
         <Archive />

@@ -13,6 +13,10 @@ export const exchangeReportEndpoints = {
   post: API_URL + '/exchangeReports',
 };
 
+export const objectEndpoints = {
+  post: API_URL + '/objects',
+};
+
 export const moduleEndpoints = {
   get: API_URL + '/modules',
 };

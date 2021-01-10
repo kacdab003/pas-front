@@ -18,6 +18,7 @@ const NavbarItems = ({ onToggle }) => {
         path={'/new-exchange-report'}
         onToggle={onToggle}
       />
+      <NavbarItem navIcon={null} title={'Dodaj obiekt'} path={'/new-object'} onToggle={onToggle} />
       <NavbarItem navIcon={logoutIcon} title={'Log out'} onToggle={onToggle} path={'/logout'} />
     </StyledNavbarItems>
   );
