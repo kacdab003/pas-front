@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ObjectResult from './ObjectResult/ObjectResult';
 import { ObjectResultsWrapper } from './StyledObjectResults';
 import { objectEndpoints } from '../../../../shared/config/endpoints';
-import Axios from 'axios';
+import axios from '../../../../axios';
 
 const ObjectResults = (props) => {
   //const [passedObjects] = useState([props.objects]);
@@ -13,13 +13,13 @@ const ObjectResults = (props) => {
   useEffect(() => {
     const fetchObjects = async () => {
       try {
-        const response = await Axios.get(objectEndpoints.get);
+        const response = await axios.get(objectEndpoints.get);
 
         const fetchedObjects = response.data.filter((ob) => props.objects.includes(ob._id));
 
         setObjects(fetchedObjects);
       } catch (error) {
-        setError(error.response.data);
+        setError(error?.response?.data || error.message);
       }
     };
     fetchObjects();

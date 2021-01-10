@@ -17,12 +17,6 @@ const ObjectForm = (props) => {
     return console.log('Add existing object');
   };
 
-  const addNewObjectHandler = (event) => {
-    event.preventDefault();
-    props.changeObjects(newObject);
-    return console.log('Add new object');
-  };
-
   const selectChangedHandler = (event) => {
     event.preventDefault();
     setExistingObject(event.target.value);
@@ -49,12 +43,6 @@ const ObjectForm = (props) => {
           onError={setError}
         />
         <SubmitButton title={'Dodaj'} buttonProps={{ onClick: addExistingObjectHandler }} />
-      </StyledObjectForm>
-
-      <StyledObjectParagraph>Dodaj nowy obiekt</StyledObjectParagraph>
-      <StyledObjectForm>
-        {generateInputsFromConfig(newReportForms.objectForm)}
-        <SubmitButton title={'Dodaj'} buttonProps={{ onClick: addNewObjectHandler }} />
       </StyledObjectForm>
     </div>
   );

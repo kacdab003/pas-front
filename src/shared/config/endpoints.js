@@ -14,6 +14,7 @@ export const exchangeReportEndpoints = {
 };
 
 export const objectEndpoints = {
+  get: API_URL + '/objects',
   post: API_URL + '/objects',
 };
 
@@ -31,10 +32,6 @@ export const moduleStateBEndpoints = {
 
 export const moduleStateCEndpoints = {
   get: API_URL + '/moduleStateCs',
-};
-
-export const objectEndpoints = {
-  get: API_URL + '/objects',
 };
 
 export const userEndpoints = {
