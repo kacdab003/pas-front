@@ -5,10 +5,10 @@ const AuthSelect = (props) => {
   return (
     <StyledAuthSelect onChange={props.onChange} value={props.value}>
       <option value="" disabled selected>
-        Employment type
+        Stanowisko
       </option>
-      <option value="ENGINEER">Engineer</option>
-      <option value="TECHNICIAN">Technician</option>
+      <option value="ENGINEER">Inżynier</option>
+      <option value="TECHNICIAN">Technik</option>
     </StyledAuthSelect>
   );
 };
