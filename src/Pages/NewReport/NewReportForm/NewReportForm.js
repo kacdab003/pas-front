@@ -6,10 +6,15 @@ import generateInputsFromConfig from '../../../shared/config/forms/generateInput
 import ObjectForm from './ObjectForm/ObjectForm';
 import ObjectResults from './ObjectResults/ObjectResults';
 const NewReportForm = () => {
-  const [objects, changeObjects] = useState([]);
+  const [objectIDs, changeObjectIDs] = useState([]);
+  const [detailedObjects, changeDetailedObjects] = useState([]);
 
   const objectsChangedHanlder = (object) => {
-    changeObjects((prevState) => [...prevState, object]);
+    changeObjectIDs((prevState) => [...prevState, object]);
+  };
+
+  const passDetailedObjectsHandler = (passedObjects) => {
+    changeDetailedObjects((prevState) => [...prevState, passedObjects]);
   };
 
   return (
@@ -23,7 +28,7 @@ const NewReportForm = () => {
       </FormSectionWrapper>
       <SeparateLine />
       <ObjectForm changeObjects={objectsChangedHanlder} />
-      <ObjectResults objects={objects} />
+      <ObjectResults objectIDs={objectIDs} passDetailedObjects={passDetailedObjectsHandler} />
     </form>
   );
 };

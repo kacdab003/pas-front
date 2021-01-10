@@ -14,13 +14,13 @@ const ObjectForm = (props) => {
   const addExistingObjectHandler = (event) => {
     event.preventDefault();
     props.changeObjects(existingObject);
-    return console.log('Add existing object');
+    console.log('Add existing object');
   };
 
   const selectChangedHandler = (event) => {
     event.preventDefault();
     setExistingObject(event.target.value);
-    return console.log('SELECT CHANGED');
+    console.log('SELECT CHANGED');
   };
 
   return (
