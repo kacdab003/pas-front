@@ -4,8 +4,8 @@ import { Highlight, MainNavHeader } from '../../UI/Headers/Headers';
 const LoginHeader = () => {
   return (
     <div>
-      <MainNavHeader>Welcome!</MainNavHeader>
-      <Highlight>Sign in to your account or create a shiny new one.</Highlight>
+      <MainNavHeader>Witaj!</MainNavHeader>
+      <Highlight>Zaloguj się lub stwórz nowe konto.</Highlight>
     </div>
   );
 };
