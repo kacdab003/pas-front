@@ -1,4 +1,4 @@
-import Axios from 'axios';
+import axios from '../../axios';
 import React, { useEffect, useState } from 'react';
 import CenteredLoader from '../UI/CenteredLoader/CenteredLoader';
 import ArchiveResult from './ArchiveResult/ArchiveResult';
@@ -16,7 +16,7 @@ const ArchiveResults = () => {
   useEffect(() => {
     const fetchArchiveResults = async () => {
       try {
-        const response = await Axios.get(archiveEndpoints.get);
+        const response = await axios.get(archiveEndpoints.get);
 
         const mappedResults = response.data.map((result) => ({
           key: result._id,

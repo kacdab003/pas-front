@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../../axios';
 import { userAuthEndpoints } from '../../shared/config/endpoints';
 
 import * as actionTypes from './actionTypes';
@@ -47,11 +47,7 @@ export const auth = (login, password, onSuccess) => {
     dispatch(authStart());
     try {
       const authData = { login, password };
-      const response = await axios.post(userAuthEndpoints.login, authData, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      const response = await axios.post(userAuthEndpoints.login, authData);
       const { token: idToken, userId, fullName, expiresIn } = response.data;
       if (!idToken || !userId) {
         throw new Error('Unable to authenticate');

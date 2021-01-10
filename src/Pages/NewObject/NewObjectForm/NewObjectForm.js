@@ -4,7 +4,7 @@ import newObjectConfig from '../../../shared/config/forms/newObject';
 import FormInput from '../../../components/FormInput/FormInput';
 import SubmitButton from '../../../components/SubmitButton/SubmitButton';
 import SeparateLine from '../../../components/UI/SeparateLine/SeparateLine';
-import Axios from 'axios';
+import axios from '../../../axios';
 import { objectEndpoints } from '../../../shared/config/endpoints';
 import ErrorMessage from '../../../components/ErrorMessage/ErrorMessage';
 
@@ -17,7 +17,7 @@ const NewObjectForm = () => {
       ...formData,
     };
     try {
-      await Axios.post(objectEndpoints.post, data);
+      await axios.post(objectEndpoints.post, data);
     } catch (error) {
       setError(error.response.data);
     }
