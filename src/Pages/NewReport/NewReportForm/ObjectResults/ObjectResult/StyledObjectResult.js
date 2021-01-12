@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const StyledObjectResult = styled.div`
   width: 70%;
-  height: 4rem;
+  height: 6rem;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr;

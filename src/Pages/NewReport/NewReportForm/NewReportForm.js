@@ -5,6 +5,7 @@ import SeparateLine from '../../../components/UI/SeparateLine/SeparateLine';
 import generateInputsFromConfig from '../../../shared/config/forms/generateInputsFromConfig';
 import ObjectForm from './ObjectForm/ObjectForm';
 import ObjectResults from './ObjectResults/ObjectResults';
+
 const NewReportForm = () => {
   const [objectIDs, changeObjectIDs] = useState([]);
   const [detailedObjects, changeDetailedObjects] = useState([]);

@@ -3,7 +3,6 @@ import ObjectResult from './ObjectResult/ObjectResult';
 import { ObjectResultsWrapper } from './StyledObjectResults';
 import { objectEndpoints } from '../../../../shared/config/endpoints';
 import axios from '../../../../axios';
-
 const ObjectResults = ({ passDetailedObjects, objectIDs }) => {
   //const [passedObjects] = useState([objects]);
   const [objects, setObjects] = useState([]);
