@@ -1,16 +1,20 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { IconButton } from '../../../../../components/IconButton/IconButton';
 import { StyledObjectOptions, StyledObjectProperty, StyledObjectResult } from './StyledObjectResult';
 import deleteIcon from '../../../../../assets/icons/delete.png';
 import settingsIcon from '../../../../../assets/icons/settings.png';
 import FormInput from '../../../../../components/FormInput/FormInput';
 import Modal from '../../../../../components/UI/Modal/Modal';
-import FormSelect from '../../../../../components/FormSelect/FormSelect';
-import damagedModuleAdder from '../../../../../shared/config/forms/damagedModuleAdder';
+import ModuleSelect from '../../../../../components/ModuleSelect/ModuleSelect';
+import ModuleContext from '../../../../../components/UtilComponents/ModuleContext/ModuleContext';
+
+export const moduleAContext = React.createContext([]);
 
 const ObjectResult = ({ id, name, t1Value, t2Value, t3Value, c1Value, damagedModules, updateObjectValuesHandler }) => {
   const [showModal, setShowModal] = useState(false);
   const [error, setError] = useState(false);
+  const initialModuleAs = useContext(moduleAContext);
+  const [moduleAs, setModuleAs] = useState(initialModuleAs);
 
   const updateObjectValues = (event) => {
     updateObjectValuesHandler(event.target.name, event.target.value, id);
@@ -23,22 +27,11 @@ const ObjectResult = ({ id, name, t1Value, t2Value, t3Value, c1Value, damagedMod
   };
 
   return (
-    <React.Fragment>
+    <>
       <Modal show={showModal} modalClosed={() => setShowModal(false)}>
-        <FormSelect
-          key={damagedModuleAdder.label}
-          defaultOptionLabel={damagedModuleAdder.defaultOptionLabel}
-          labelContent={damagedModuleAdder.label}
-          selectProps={{
-            name: damagedModuleAdder.name,
-            required: damagedModuleAdder.required,
-            label: damagedModuleAdder.label,
-            onChange: selectChangedHandler,
-          }}
-          refEndpoint={damagedModuleAdder.refEndpoint}
-          refKey={damagedModuleAdder.refKey}
-          onError={setError}
-        />
+        <ModuleContext value={moduleAs} initialContext={moduleAContext} setValue={setModuleAs}>
+          <ModuleSelect />
+        </ModuleContext>
       </Modal>
 
       <StyledObjectResult>
@@ -97,7 +90,7 @@ const ObjectResult = ({ id, name, t1Value, t2Value, t3Value, c1Value, damagedMod
           <IconButton src={settingsIcon} onClick={buttonClickedHandler} />
         </StyledObjectOptions>
       </StyledObjectResult>
-    </React.Fragment>
+    </>
   );
 };
 

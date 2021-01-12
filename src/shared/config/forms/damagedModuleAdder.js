@@ -5,7 +5,7 @@ const damagedModuleAdder = {
   name: 'moduleNumber',
   defaultOptionLabel: 'Wybierz moduł',
   refEndpoint: moduleStateAEndpoints.get,
-  refKey: 'module.moduleNumber',
+  refModuleNumberKey: 'module.moduleNumber',
   required: false,
 };
 
