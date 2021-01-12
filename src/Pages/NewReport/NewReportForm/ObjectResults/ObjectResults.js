@@ -43,7 +43,6 @@ const ObjectResults = ({ passDetailedObjects, objectIDs }) => {
   }, [objectIDs, passDetailedObjects]);
 
   const mapObjects = () => {
-    console.log('MapObjects', objects);
     const mappedResults = objects?.map(({ _id, name, T1, T2, T3, C1, U }) => (
       <ObjectResult
         key={name}
@@ -57,7 +56,7 @@ const ObjectResults = ({ passDetailedObjects, objectIDs }) => {
         updateObjectValuesHandler={updateObjectValuesHandler}
       />
     ));
-    console.log(mappedResults);
+
     return mappedResults;
   };
 

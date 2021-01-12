@@ -6,7 +6,7 @@ import { StyledContainer, StyledLayout } from './StyledLayout';
 
 const Layout = (props) => {
   const [isModalOpened, setIsModalOpened] = useState(false);
-  console.log(props.isAuthenticated);
+
   const toggleModalHandler = () => {
     setIsModalOpened((isOpened) => !isOpened);
   };

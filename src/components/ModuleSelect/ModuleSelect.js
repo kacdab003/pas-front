@@ -4,7 +4,6 @@ import { moduleAContext } from '../../Pages/NewReport/NewReportForm/ObjectResult
 
 const ModuleSelect = ({ defaultOptionLabel, labelContent, selectProps, refEndpoint, refKey, onError }) => {
   const modulesArray = useContext(moduleAContext);
-  console.log('DUPA', modulesArray);
 
   const options = modulesArray.moduleArray.map((option) => {
     if (!option) {

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IconButton } from '../../../../../components/IconButton/IconButton';
 import { StyledObjectOptions, StyledObjectProperty, StyledObjectResult } from './StyledObjectResult';
 import deleteIcon from '../../../../../assets/icons/delete.png';
@@ -7,18 +7,33 @@ import FormInput from '../../../../../components/FormInput/FormInput';
 import Modal from '../../../../../components/UI/Modal/Modal';
 import ModuleSelect from '../../../../../components/ModuleSelect/ModuleSelect';
 import ModuleContext from '../../../../../components/UtilComponents/ModuleContext/ModuleContext';
+import damagedModuleAdder from '../../../../../shared/config/forms/damagedModuleAdder';
+import axios from 'axios';
 
 export const moduleAContext = React.createContext([]);
+export const moduleBContext = React.createContext([]);
 
 const ObjectResult = ({ id, name, t1Value, t2Value, t3Value, c1Value, damagedModules, updateObjectValuesHandler }) => {
   const [showModal, setShowModal] = useState(false);
-  const [error, setError] = useState(false);
-  const initialModuleAs = useContext(moduleAContext);
-  const [moduleAs, setModuleAs] = useState(initialModuleAs);
+  const [moduleAs, setModuleAs] = useState([]);
 
   const updateObjectValues = (event) => {
     updateObjectValuesHandler(event.target.name, event.target.value, id);
   };
+
+  useEffect(() => {
+    const fetchModules = async () => {
+      try {
+        const response = await axios.get(damagedModuleAdder.refEndpoint);
+        if (response.data.length === 0) {
+          return;
+        }
+        const moduleObjects = response.data.map((moduleObject) => moduleObject.module);
+        setModuleAs(moduleObjects);
+      } catch (error) {}
+    };
+    fetchModules();
+  });
 
   const selectChangedHandler = (event) => {};
 
@@ -29,7 +44,7 @@ const ObjectResult = ({ id, name, t1Value, t2Value, t3Value, c1Value, damagedMod
   return (
     <>
       <Modal show={showModal} modalClosed={() => setShowModal(false)}>
-        <ModuleContext value={moduleAs} initialContext={moduleAContext} setValue={setModuleAs}>
+        <ModuleContext initialContext={moduleAContext} value={moduleAs} setValue={setModuleAs}>
           <ModuleSelect />
         </ModuleContext>
       </Modal>
