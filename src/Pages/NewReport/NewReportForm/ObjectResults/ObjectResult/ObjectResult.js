@@ -24,7 +24,7 @@ const ObjectResult = ({ id, name, t1Value, t2Value, t3Value, c1Value, damagedMod
 
   return (
     <React.Fragment>
-      <Modal show={showModal}>
+      <Modal show={showModal} modalClosed={() => setShowModal(false)}>
         <FormSelect
           key={damagedModuleAdder.label}
           defaultOptionLabel={damagedModuleAdder.defaultOptionLabel}

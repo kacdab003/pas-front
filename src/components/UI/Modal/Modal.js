@@ -10,10 +10,9 @@ class Modal extends Component {
 
   render() {
     return (
-      <StyledModal>
-        <Backdrop show={this.props.show} clicked={this.props.modalClosed} />
-        {this.props.children}
-      </StyledModal>
+      <Backdrop show={this.props.show} clicked={this.props.modalClosed}>
+        <StyledModal show={this.props.show}>{this.props.children}</StyledModal>
+      </Backdrop>
     );
   }
 }
