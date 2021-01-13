@@ -43,8 +43,8 @@ const ObjectResult = ({ id, name, t1Value, t2Value, t3Value, c1Value, damagedMod
 
   return (
     <>
-      <Modal show={showModal} modalClosed={() => setShowModal(false)}>
-        <ModuleContext initialContext={moduleAContext} value={moduleAs} setValue={setModuleAs}>
+      <Modal show={showModal}>
+        <ModuleContext contextObject={moduleAContext} value={moduleAs} setValue={setModuleAs}>
           <ModuleSelect />
         </ModuleContext>
       </Modal>
