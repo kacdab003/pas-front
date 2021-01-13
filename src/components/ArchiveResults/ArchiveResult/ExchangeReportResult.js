@@ -1,5 +1,4 @@
 import React from 'react';
-import { exchangeReportEndpoints } from '../../../shared/config/endpoints';
 import { StyledExchangeReportResult } from './StyledArchiveResult';
 import moment from 'moment';
 
@@ -9,11 +8,21 @@ const ExchangeReportResult = (props) => {
 
   return (
     <StyledExchangeReportResult>
-      <p>Numer modułu: {newModule?.moduleNumber}</p>
-      <p>Numer uszkodzonego modułu: {damagedModule?.moduleNumber}</p>
-      <p>Numer obiektu: {objectNumber}</p>
-      <p>Pracownik: {exchangeWorker?.name + ' ' + exchangeReportEndpoints?.surname}</p>
-      <p>Data wymiany: {moment(exchangeDate).format('YYYY-MM-DD hh:mm')}</p>
+      <div>
+        Numer modułu: <span>{newModule?.moduleNumber}</span>
+      </div>
+      <div>
+        Numer uszkodzonego modułu: <span>{damagedModule?.moduleNumber}</span>
+      </div>
+      <div>
+        Numer obiektu: <span>{objectNumber}</span>
+      </div>
+      <div>
+        Pracownik: <span>{exchangeWorker?.name + ' ' + exchangeWorker?.surname}</span>
+      </div>
+      <div>
+        Data wymiany: <span> {moment(exchangeDate).format('YYYY-MM-DD hh:mm')}</span>
+      </div>
     </StyledExchangeReportResult>
   );
 };

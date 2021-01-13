@@ -15,11 +15,17 @@ export const ArchiveResultElement = styled.td`
 `;
 
 export const StyledExchangeReportResult = styled.div`
-  width: 100%;
+  text-align: center;
+  width: 60%;
   display: flex;
+  background-color: rgba(230, 42, 148, 0.3);
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: black 1rem solid;
-  margin: 1rem;
+  border: black 2px solid;
+  margin: 1rem auto;
+  padding: 0.5rem;
+  & span {
+    font-weight: bold;
+  }
 `;
