@@ -18,7 +18,7 @@ const ExchangeReportResult = (props) => {
         Numer obiektu: <span>{objectNumber}</span>
       </div>
       <div>
-        Pracownik: <span>{exchangeWorker?.name + ' ' + exchangeWorker?.surname}</span>
+        Pracownik: <span>{exchangeWorker?.fullName}</span>
       </div>
       <div>
         Data wymiany: <span> {moment(exchangeDate).format('YYYY-MM-DD hh:mm')}</span>
