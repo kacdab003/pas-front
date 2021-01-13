@@ -13,3 +13,13 @@ export const ArchiveResultElement = styled.td`
   text-transform: uppercase;
   text-align: center;
 `;
+
+export const StyledExchangeReportResult = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: black 1rem solid;
+  margin: 1rem;
+`;
