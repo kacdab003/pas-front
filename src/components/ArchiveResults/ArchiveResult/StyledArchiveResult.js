@@ -23,7 +23,7 @@ export const StyledExchangeReportResult = styled.div`
   justify-content: center;
   align-items: center;
   border: black 2px solid;
-  margin: 1rem auto;
+  margin: 2rem auto;
   padding: 0.5rem;
   & span {
     font-weight: bold;

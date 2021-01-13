@@ -9,6 +9,7 @@ import { archiveEndpoints, exchangeReportEndpoints } from '../../shared/config/e
 import Message from '../../components/Message/Message';
 import ExchangeReportResult from './ArchiveResult/ExchangeReportResult';
 import { SecondaryHeader } from '../UI/Headers/Headers';
+import SearchBar from '../SearchBar/SearchBar';
 
 const ArchiveResults = () => {
   const [fetchedReports, setFetchedReports] = useState([]);
@@ -68,6 +69,8 @@ const ArchiveResults = () => {
   return (
     <>
       <SecondaryHeader>Raporty wymiany</SecondaryHeader>
+      <SearchBar label={'WYSZUKAJ'} placeholder={'Wpisz słowo kluczowe'} />
+
       <ResultsTable>
         <tbody>
           <ArchiveResultsHeader />
@@ -75,6 +78,8 @@ const ArchiveResults = () => {
         </tbody>
       </ResultsTable>
       <SecondaryHeader>Raporty</SecondaryHeader>
+      <SearchBar label={'WYSZUKAJ'} placeholder={'Wpisz słowo kluczowe'} />
+
       {!isLoading && fetchedExchangeReportsElements}
     </>
   );
