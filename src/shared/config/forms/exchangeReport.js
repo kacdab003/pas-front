@@ -18,7 +18,7 @@ const exchangeReportConfig = {
       name: 'exchangeWorker',
       required: true,
       refEndpoint: userEndpoints.get,
-      refKey: 'surname',
+      refKey: 'fullName',
     },
     {
       defaultOptionLabel: 'Wybierz moduł',
