@@ -29,8 +29,8 @@ const ArchiveResults = () => {
           id: result.nr,
           date: moment(result.createdAt).format('YYYY-MM-DD hh:mm'),
           configuration: result.configuration,
-          fullName: result?.exchangeWorker?.name + ' ' + result?.exchangeWorker?.surname,
-          office: result.worker.position === 'ENGINEER' ? 'INŻYNIER' : 'TECHNIK',
+          fullName: result.workers[0]?.fullName,
+          office: result.workers[0]?.position === 'ENGINEER' ? 'INŻYNIER' : 'TECHNIK',
         }));
         console.log('FILTERED RESULTS', filteredResults);
         setFetchedReports(filteredResults);

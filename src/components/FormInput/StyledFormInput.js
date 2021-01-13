@@ -19,8 +19,9 @@ export const StyledFormInput = styled.input`
   &::placeholder {
     color: #ccc;
   }
-  &[type='date'] {
+  &[type='datetime-local'] {
     font-family: inherit;
+    font-size: 1rem;
     letter-spacing: 1px;
     text-transform: uppercase;
     text-align: center;
