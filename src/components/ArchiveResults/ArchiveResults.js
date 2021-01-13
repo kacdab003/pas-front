@@ -8,6 +8,7 @@ import moment from 'moment';
 import { archiveEndpoints, exchangeReportEndpoints } from '../../shared/config/endpoints';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 import ExchangeReportResult from './ArchiveResult/ExchangeReportResult';
+import { SecondaryHeader } from '../UI/Headers/Headers';
 
 const ArchiveResults = () => {
   const [fetchedReports, setFetchedReports] = useState([]);
@@ -28,14 +29,15 @@ const ArchiveResults = () => {
           id: result.nr,
           date: moment(result.createdAt).format('YYYY-MM-DD hh:mm'),
           configuration: result.configuration,
-          fullName: result.worker.name + ' ' + result.worker.surname,
+          fullName: result?.exchangeWorker?.name + ' ' + result?.exchangeWorker?.surname,
           office: result.worker.position === 'ENGINEER' ? 'INŻYNIER' : 'TECHNIK',
         }));
-
+        console.log('FILTERED RESULTS', filteredResults);
         setFetchedReports(filteredResults);
         setFetchedExchangeReports(exchangeReportsData);
         setIsLoading(false);
       } catch (error) {
+        console.log(error);
         setError(error?.response?.data || error.message);
         setIsLoading(false);
       }
@@ -65,12 +67,14 @@ const ArchiveResults = () => {
   });
   return (
     <>
+      <SecondaryHeader>Raporty wymiany</SecondaryHeader>
       <ResultsTable>
         <tbody>
           <ArchiveResultsHeader />
           {!isLoading && fetchedResultsElement}
         </tbody>
       </ResultsTable>
+      <SecondaryHeader>Raporty</SecondaryHeader>
       {!isLoading && fetchedExchangeReportsElements}
     </>
   );
