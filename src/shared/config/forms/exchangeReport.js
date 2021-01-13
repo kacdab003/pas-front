@@ -5,7 +5,7 @@ const exchangeReportConfig = {
     {
       label: 'Data wymiany',
       name: 'exchangeDate',
-      type: 'date',
+      type: 'datetime-local',
       required: true,
     },
     { label: 'Numer obiektu', name: 'objectNumber', type: 'number', required: true },
