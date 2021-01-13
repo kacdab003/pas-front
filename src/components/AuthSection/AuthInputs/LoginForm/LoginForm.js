@@ -31,7 +31,7 @@ const LoginForm = (props) => {
         value={password}
       />
       <SmallActionButton>
-        {props.isLoading ? <CenteredLoader color="gray" size={'20px'} /> : 'ZALOGUJ'}
+        {props.isLoading ? <CenteredLoader color="blue" size={'20px'} /> : 'ZALOGUJ'}
       </SmallActionButton>
     </LoginFormContainer>
   );
