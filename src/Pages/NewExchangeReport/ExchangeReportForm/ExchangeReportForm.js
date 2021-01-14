@@ -8,18 +8,13 @@ import axios from '../../../axios';
 import { exchangeReportEndpoints } from '../../../shared/config/endpoints';
 import FormSelect from '../../../components/FormSelect/FormSelect';
 import Message from '../../../components/Message/Message';
+import { hideMessage } from '../../../shared/utils/forms/formUtils';
 
 const ExchangeReportForm = () => {
   const [formData, changeFormData] = useState({});
   const [error, setError] = useState(false);
   const [selects, setSelects] = useState([]);
   const [formSubmitted, setFormSubmitted] = useState(false);
-
-  const hideMessage = useCallback(() => {
-    setTimeout(() => {
-      setFormSubmitted(false);
-    }, 4000);
-  }, []);
 
   const saveData = useCallback(async () => {
     const data = {
@@ -29,11 +24,11 @@ const ExchangeReportForm = () => {
       setError(false);
       await axios.post(exchangeReportEndpoints.post, data);
       setFormSubmitted(true);
-      hideMessage();
+      hideMessage(setFormSubmitted);
     } catch (error) {
       setError(error.response.data);
     }
-  }, [formData, hideMessage]);
+  }, [formData]);
 
   const formSubmitHandler = useCallback(
     (event) => {

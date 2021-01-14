@@ -7,6 +7,7 @@ import SeparateLine from '../../../components/UI/SeparateLine/SeparateLine';
 import axios from '../../../axios';
 import { objectEndpoints } from '../../../shared/config/endpoints';
 import Message from '../../../components/Message/Message';
+import { hideMessage } from '../../../shared/utils/forms/formUtils';
 
 const NewObjectForm = () => {
   const [formData, changeFormData] = useState({});
@@ -22,17 +23,11 @@ const NewObjectForm = () => {
       setError(false);
       await axios.post(objectEndpoints.post, data);
       setFormSubmitted(true);
-      hideMessage();
+      hideMessage(setFormSubmitted);
     } catch (error) {
       setError(error.response.data);
     }
   }, [formData]);
-
-  const hideMessage = () => {
-    setTimeout(() => {
-      setFormSubmitted(false);
-    }, 4000);
-  };
 
   const formSubmitHandler = useCallback(
     (event) => {
