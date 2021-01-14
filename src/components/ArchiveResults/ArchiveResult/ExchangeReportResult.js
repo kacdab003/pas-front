@@ -4,7 +4,6 @@ import moment from 'moment';
 
 const ExchangeReportResult = (props) => {
   const { newModule, exchangeWorker, damagedModule, objectNumber, exchangeDate } = props.exchangeReportObject;
-  console.log('exchangeReportObject', props.exchangeReportObject);
 
   return (
     <StyledExchangeReportResult>

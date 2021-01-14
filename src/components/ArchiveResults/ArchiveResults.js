@@ -18,6 +18,54 @@ const ArchiveResults = () => {
   const [error, setError] = useState();
   const [reportsSearchText, setReportsSearchText] = useState('');
   const [exchangeReportsSearchText, setExchangeReportsSearchText] = useState('');
+  const [filteredReports, setFilteredReports] = useState(fetchedReports);
+  const [filteredExchangeReports, setFilteredExchangeReports] = useState(fetchedExchangeReports);
+
+  const state = {
+    fetchedReports,
+    fetchedExchangeReports,
+    isLoading,
+    error,
+    reportsSearchText,
+    exchangeReportsSearchText,
+    filteredReports,
+    filteredExchangeReports,
+  };
+  console.log('STATE', state);
+
+  const onReportSearch = (searchPhrase = '') => {
+    const searchResult = fetchedReports.filter((report) => {
+      return (
+        report.configurationtoLowerCase().includes(searchPhrase) ||
+        report.fullNametoLowerCase().includes(searchPhrase) ||
+        report.id.toString().toLowerCase().includes(searchPhrase)
+      );
+    });
+    setFilteredReports(searchResult);
+  };
+
+  const onExchangeReportSearch = (searchPhrase = '') => {
+    const searchResult = fetchedExchangeReports.filter((exchangeReport) => {
+      console.log('EXCHANGE REPORT', exchangeReport);
+      return (
+        exchangeReport?.newModule?.moduleNumber.toString().toLowerCase().includes(searchPhrase.toLowerCase()) ||
+        exchangeReport?.exchangeWorker?.fullName?.toLowerCase().includes(searchPhrase.toLowerCase()) ||
+        exchangeReport?.id?.toLowerCase().includes(searchPhrase.toLowerCase()) ||
+        exchangeReport?.objectNumber?.toString().toLowerCase().includes(searchPhrase.toLowerCase())
+      );
+    });
+    setFilteredExchangeReports(searchResult);
+  };
+
+  const reportSearchPhraseEnteredHandler = (event) => {
+    setReportsSearchText(event.target.value);
+    onReportSearch(event.target.value || '');
+  };
+
+  const exchangeReportSearchPhraseEnteredHandler = (event) => {
+    setExchangeReportsSearchText(event.target.value);
+    onExchangeReportSearch(event.target.value || '');
+  };
 
   useEffect(() => {
     const fetchArchiveResults = async () => {
@@ -35,12 +83,13 @@ const ArchiveResults = () => {
           fullName: result.workers[0]?.fullName,
           office: result.workers[0]?.position === 'ENGINEER' ? 'INŻYNIER' : 'TECHNIK',
         }));
-        console.log('FILTERED RESULTS', filteredResults);
+
         setFetchedReports(filteredResults);
         setFetchedExchangeReports(exchangeReportsData);
+        setFilteredExchangeReports(exchangeReportsData);
+
         setIsLoading(false);
       } catch (error) {
-        console.log(error);
         setError(error?.response?.data || error.message);
         setIsLoading(false);
       }
@@ -54,7 +103,7 @@ const ArchiveResults = () => {
   if (error) {
     return <Message message={'Błąd wczytywania danych!'} messageType={'ERROR'} />;
   }
-  const fetchedResultsElement = fetchedReports.map((result) => (
+  const fetchedResultsElement = filteredReports.map((result) => (
     <ArchiveResult
       key={result.key}
       id={result.id}
@@ -64,16 +113,16 @@ const ArchiveResults = () => {
       office={result.office}
     />
   ));
-  const fetchedExchangeReportsElements = fetchedExchangeReports.map((exchangeReport) => {
-    console.log('ER', exchangeReport);
-    return <ExchangeReportResult exchangeReportObject={exchangeReport} />;
+  const fetchedExchangeReportsElements = filteredExchangeReports.map((exchangeReport) => {
+    return <ExchangeReportResult key={exchangeReport._id} exchangeReportObject={exchangeReport} />;
   });
+
   return (
     <>
       <SecondaryHeader>Raporty</SecondaryHeader>
       <SearchBar
         value={reportsSearchText}
-        setValue={setReportsSearchText}
+        setValue={reportSearchPhraseEnteredHandler}
         label={'WYSZUKAJ'}
         placeholder={'Wpisz wyszukiwaną frazę'}
       />
@@ -87,7 +136,7 @@ const ArchiveResults = () => {
       <SecondaryHeader>Raporty wymiany</SecondaryHeader>
       <SearchBar
         value={exchangeReportsSearchText}
-        setValue={setExchangeReportsSearchText}
+        setValue={exchangeReportSearchPhraseEnteredHandler}
         label={'WYSZUKAJ'}
         placeholder={'Wpisz wyszukiwaną frazę'}
       />

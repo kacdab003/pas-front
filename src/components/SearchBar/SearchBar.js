@@ -7,7 +7,7 @@ const SearchBar = ({ label, placeholder, value, setValue }) => {
   return (
     <StyledSearchBar>
       <SearchLabel>{label}</SearchLabel>
-      <SearchInput value={value} onChange={(event) => setValue(event.target.value)} placeholder={placeholder} />
+      <SearchInput value={value} onChange={setValue} placeholder={placeholder} />
     </StyledSearchBar>
   );
 };
