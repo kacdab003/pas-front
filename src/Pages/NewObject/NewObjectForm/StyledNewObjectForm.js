@@ -11,7 +11,7 @@ export const StyledNewObjectForm = styled.form`
 `;
 
 export const StyledNewObjectFormWrapper = styled.div`
-  height: 90%;
+  height: 60%;
   display: grid;
   grid-template-rows: 6fr 1fr 3fr;
   align-items: center;

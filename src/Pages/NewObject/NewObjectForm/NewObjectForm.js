@@ -11,21 +11,34 @@ import Message from '../../../components/Message/Message';
 const NewObjectForm = () => {
   const [formData, changeFormData] = useState({});
   const [error, setError] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
   const saveData = useCallback(async () => {
     const data = {
       ...formData,
     };
+
     try {
+      setError(false);
       await axios.post(objectEndpoints.post, data);
+      setFormSubmitted(true);
+      hideMessage();
     } catch (error) {
       setError(error.response.data);
     }
   }, [formData]);
 
+  const hideMessage = () => {
+    setTimeout(() => {
+      setFormSubmitted(false);
+    }, 4000);
+  };
+
   const formSubmitHandler = useCallback(
     (event) => {
+      setFormSubmitted(false);
       event.preventDefault();
+
       saveData();
     },
     [saveData]
@@ -38,7 +51,7 @@ const NewObjectForm = () => {
 
   useEffect(() => {
     newObjectConfig.inputs.forEach((input) => changeFormData((prevState) => ({ ...prevState, [input.name]: '' })));
-  }, [inputChangedHandler]);
+  }, []);
 
   const inputs = newObjectConfig.inputs.map(({ type, name, required, placeholder, label }) => {
     const inputProps = {
@@ -52,20 +65,16 @@ const NewObjectForm = () => {
     return <FormInput key={label} labelContent={label} inputProps={inputProps} />;
   });
 
-  if (error) {
-    return (
-      <StyledNewObjectFormWrapper>
-        <Message message={error.message} messageType={'ERROR'} />
-      </StyledNewObjectFormWrapper>
-    );
-  }
-
   return (
-    <StyledNewObjectFormWrapper>
-      <StyledNewObjectForm>{inputs}</StyledNewObjectForm>
-      <SeparateLine />
-      <SubmitButton title={'Zatwierdź'} buttonProps={{ type: 'submit', onClick: formSubmitHandler }} />
-    </StyledNewObjectFormWrapper>
+    <>
+      {error ? <Message message={error.message} messageType={'ERROR'} /> : null}
+      {formSubmitted ? <Message message={'Obiekt dodany pomyślnie'} messageType={'SUCCESS'} /> : null}
+      <StyledNewObjectFormWrapper>
+        <StyledNewObjectForm>{inputs}</StyledNewObjectForm>
+        <SeparateLine />
+        <SubmitButton title={'Zatwierdź'} buttonProps={{ type: 'submit', onClick: formSubmitHandler }} />
+      </StyledNewObjectFormWrapper>
+    </>
   );
 };
 
