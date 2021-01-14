@@ -5,3 +5,8 @@ export const ResultsTable = styled.table`
   border-spacing: 0 1rem;
   margin: 2rem auto;
 `;
+export const ErrorResults = styled.div`
+  width: 80%;
+  height: 12rem;
+  margin: 2rem auto;
+`;
