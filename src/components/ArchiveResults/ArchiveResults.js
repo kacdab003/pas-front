@@ -16,6 +16,8 @@ const ArchiveResults = () => {
   const [fetchedExchangeReports, setFetchedExchangeReports] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState();
+  const [reportsSearchText, setReportsSearchText] = useState('');
+  const [exchangeReportsSearchText, setExchangeReportsSearchText] = useState('');
 
   useEffect(() => {
     const fetchArchiveResults = async () => {
@@ -68,8 +70,13 @@ const ArchiveResults = () => {
   });
   return (
     <>
-      <SecondaryHeader>Raporty wymiany</SecondaryHeader>
-      <SearchBar label={'WYSZUKAJ'} placeholder={'Wpisz słowo kluczowe'} />
+      <SecondaryHeader>Raporty</SecondaryHeader>
+      <SearchBar
+        value={reportsSearchText}
+        setValue={setReportsSearchText}
+        label={'WYSZUKAJ'}
+        placeholder={'Wpisz wyszukiwaną frazę'}
+      />
 
       <ResultsTable>
         <tbody>
@@ -77,8 +84,13 @@ const ArchiveResults = () => {
           {!isLoading && fetchedResultsElement}
         </tbody>
       </ResultsTable>
-      <SecondaryHeader>Raporty</SecondaryHeader>
-      <SearchBar label={'WYSZUKAJ'} placeholder={'Wpisz słowo kluczowe'} />
+      <SecondaryHeader>Raporty wymiany</SecondaryHeader>
+      <SearchBar
+        value={exchangeReportsSearchText}
+        setValue={setExchangeReportsSearchText}
+        label={'WYSZUKAJ'}
+        placeholder={'Wpisz wyszukiwaną frazę'}
+      />
 
       {!isLoading && fetchedExchangeReportsElements}
     </>
