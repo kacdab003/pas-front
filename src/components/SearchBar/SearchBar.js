@@ -3,11 +3,11 @@ import { SearchInput } from './SearchInput/StyledSearchInput';
 import { SearchLabel } from './SearchLabel/StyledSearchLabel';
 import { StyledSearchBar } from './StyledSearchBar';
 
-const SearchBar = ({ label, placeholder }) => {
+const SearchBar = ({ label, placeholder, value, setValue }) => {
   return (
     <StyledSearchBar>
       <SearchLabel>{label}</SearchLabel>
-      <SearchInput placeholder={placeholder} />
+      <SearchInput value={value} onChange={(event) => setValue(event.target.value)} placeholder={placeholder} />
     </StyledSearchBar>
   );
 };
