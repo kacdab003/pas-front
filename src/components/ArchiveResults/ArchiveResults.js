@@ -36,8 +36,8 @@ const ArchiveResults = () => {
   const onReportSearch = (searchPhrase = '') => {
     const searchResult = fetchedReports.filter((report) => {
       return (
-        report.configurationtoLowerCase().includes(searchPhrase) ||
-        report.fullNametoLowerCase().includes(searchPhrase) ||
+        report.configuration.toLowerCase().includes(searchPhrase) ||
+        report.fullName?.toLowerCase().includes(searchPhrase) ||
         report.id.toString().toLowerCase().includes(searchPhrase)
       );
     });
@@ -85,6 +85,7 @@ const ArchiveResults = () => {
         }));
 
         setFetchedReports(filteredResults);
+        setFilteredReports(filteredResults);
         setFetchedExchangeReports(exchangeReportsData);
         setFilteredExchangeReports(exchangeReportsData);
 
@@ -130,7 +131,7 @@ const ArchiveResults = () => {
       <ResultsTable>
         <tbody>
           <ArchiveResultsHeader />
-          {!isLoading && fetchedResultsElement}
+          {!isLoading && fetchedResultsElement.length > 0 ? fetchedResultsElement : <p>Brak wyników</p>}
         </tbody>
       </ResultsTable>
       <SecondaryHeader>Raporty wymiany</SecondaryHeader>
@@ -141,7 +142,7 @@ const ArchiveResults = () => {
         placeholder={'Wpisz wyszukiwaną frazę'}
       />
 
-      {!isLoading && fetchedExchangeReportsElements}
+      {!isLoading && fetchedExchangeReportsElements.length > 0 ? fetchedExchangeReportsElements : <p>Brak wyników</p>}
     </>
   );
 };
