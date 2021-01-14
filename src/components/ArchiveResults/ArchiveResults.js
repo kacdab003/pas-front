@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import CenteredLoader from '../UI/CenteredLoader/CenteredLoader';
 import ArchiveResult from './ArchiveResult/ArchiveResult';
 import ArchiveResultsHeader from './ArchiveResultsHeader/ArchiveResultsHeader';
-import { ResultsTable } from './StyledArchiveResults';
+import { ErrorResults, ResultsTable } from './StyledArchiveResults';
 import moment from 'moment';
 import { archiveEndpoints, exchangeReportEndpoints } from '../../shared/config/endpoints';
 import Message from '../../components/Message/Message';
@@ -127,13 +127,19 @@ const ArchiveResults = () => {
         label={'WYSZUKAJ'}
         placeholder={'Wpisz wyszukiwaną frazę'}
       />
+      {!isLoading && fetchedResultsElement.length > 0 ? (
+        <ResultsTable>
+          <tbody>
+            <ArchiveResultsHeader />
+            {fetchedResultsElement}
+          </tbody>
+        </ResultsTable>
+      ) : (
+        <ErrorResults>
+          <Message messageType={'ERROR'} message={'Brak wyników'} />
+        </ErrorResults>
+      )}
 
-      <ResultsTable>
-        <tbody>
-          <ArchiveResultsHeader />
-          {!isLoading && fetchedResultsElement.length > 0 ? fetchedResultsElement : <p>Brak wyników</p>}
-        </tbody>
-      </ResultsTable>
       <SecondaryHeader>Raporty wymiany</SecondaryHeader>
       <SearchBar
         value={exchangeReportsSearchText}
@@ -142,7 +148,11 @@ const ArchiveResults = () => {
         placeholder={'Wpisz wyszukiwaną frazę'}
       />
 
-      {!isLoading && fetchedExchangeReportsElements.length > 0 ? fetchedExchangeReportsElements : <p>Brak wyników</p>}
+      {!isLoading && fetchedExchangeReportsElements.length > 0 ? (
+        fetchedExchangeReportsElements
+      ) : (
+        <Message messageType={'ERROR'} message={'Brak wyników'} />
+      )}
     </>
   );
 };
