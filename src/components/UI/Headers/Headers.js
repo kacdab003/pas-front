@@ -10,6 +10,7 @@ export const MainNavHeader = styled.h1`
 
 export const MainHeader = styled.h1`
   font-size: 45px;
+  margin-bottom: 1rem;
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
   color: black;
