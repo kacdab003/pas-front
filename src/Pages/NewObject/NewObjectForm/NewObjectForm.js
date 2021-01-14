@@ -6,7 +6,7 @@ import SubmitButton from '../../../components/SubmitButton/SubmitButton';
 import SeparateLine from '../../../components/UI/SeparateLine/SeparateLine';
 import axios from '../../../axios';
 import { objectEndpoints } from '../../../shared/config/endpoints';
-import ErrorMessage from '../../../components/ErrorMessage/ErrorMessage';
+import Message from '../../../components/Message/Message';
 
 const NewObjectForm = () => {
   const [formData, changeFormData] = useState({});
@@ -55,7 +55,7 @@ const NewObjectForm = () => {
   if (error) {
     return (
       <StyledNewObjectFormWrapper>
-        <ErrorMessage message={error.message} />
+        <Message message={error.message} messageType={'ERROR'} />
       </StyledNewObjectFormWrapper>
     );
   }

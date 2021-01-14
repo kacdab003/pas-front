@@ -7,7 +7,7 @@ import { ExchangeReportFormWrapper, StyledExchangeReportForm } from './StyledExc
 import axios from '../../../axios';
 import { exchangeReportEndpoints } from '../../../shared/config/endpoints';
 import FormSelect from '../../../components/FormSelect/FormSelect';
-import ErrorMessage from '../../../components/ErrorMessage/ErrorMessage';
+import Message from '../../../components/Message/Message';
 
 const ExchangeReportForm = () => {
   const [formData, changeFormData] = useState({});
@@ -83,7 +83,7 @@ const ExchangeReportForm = () => {
   if (error) {
     return (
       <ExchangeReportFormWrapper>
-        <ErrorMessage message={error.message} />
+        <Message message={error.message} messageType={'ERROR'} />
       </ExchangeReportFormWrapper>
     );
   }

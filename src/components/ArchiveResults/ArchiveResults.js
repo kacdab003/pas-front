@@ -6,7 +6,7 @@ import ArchiveResultsHeader from './ArchiveResultsHeader/ArchiveResultsHeader';
 import { ResultsTable } from './StyledArchiveResults';
 import moment from 'moment';
 import { archiveEndpoints, exchangeReportEndpoints } from '../../shared/config/endpoints';
-import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
+import Message from '../../components/Message/Message';
 import ExchangeReportResult from './ArchiveResult/ExchangeReportResult';
 import { SecondaryHeader } from '../UI/Headers/Headers';
 
@@ -49,7 +49,7 @@ const ArchiveResults = () => {
     return <CenteredLoader />;
   }
   if (error) {
-    return <ErrorMessage message={'Błąd wczytywania danych!'} />;
+    return <Message message={'Błąd wczytywania danych!'} messageType={'ERROR'} />;
   }
   const fetchedResultsElement = fetchedReports.map((result) => (
     <ArchiveResult
