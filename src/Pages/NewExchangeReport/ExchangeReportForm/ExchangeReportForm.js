@@ -13,20 +13,31 @@ const ExchangeReportForm = () => {
   const [formData, changeFormData] = useState({});
   const [error, setError] = useState(false);
   const [selects, setSelects] = useState([]);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
+  const hideMessage = useCallback(() => {
+    setTimeout(() => {
+      setFormSubmitted(false);
+    }, 4000);
+  }, []);
 
   const saveData = useCallback(async () => {
     const data = {
       ...formData,
     };
     try {
+      setError(false);
       await axios.post(exchangeReportEndpoints.post, data);
+      setFormSubmitted(true);
+      hideMessage();
     } catch (error) {
       setError(error.response.data);
     }
-  }, [formData]);
+  }, [formData, hideMessage]);
 
   const formSubmitHandler = useCallback(
     (event) => {
+      setFormSubmitted(false);
       event.preventDefault();
       saveData();
     },
@@ -80,23 +91,19 @@ const ExchangeReportForm = () => {
     return <FormInput key={label} labelContent={label} inputProps={inputProps} />;
   });
 
-  if (error) {
-    return (
-      <ExchangeReportFormWrapper>
-        <Message message={error.message} messageType={'ERROR'} />
-      </ExchangeReportFormWrapper>
-    );
-  }
-
   return (
-    <ExchangeReportFormWrapper>
-      <StyledExchangeReportForm>
-        {inputs}
-        {selects}
-      </StyledExchangeReportForm>
-      <SeparateLine />
-      <SubmitButton title={'Zatwierdź'} buttonProps={{ type: 'submit', onClick: formSubmitHandler }} />
-    </ExchangeReportFormWrapper>
+    <>
+      {error ? <Message message={error.message} messageType={'ERROR'} /> : null}
+      {formSubmitted ? <Message message={'Raport zapisany pomyślnie'} messageType={'SUCCESS'} /> : null}
+      <ExchangeReportFormWrapper>
+        <StyledExchangeReportForm>
+          {inputs}
+          {selects}
+        </StyledExchangeReportForm>
+        <SeparateLine />
+        <SubmitButton title={'Zatwierdź'} buttonProps={{ type: 'submit', onClick: formSubmitHandler }} />
+      </ExchangeReportFormWrapper>
+    </>
   );
 };
 
