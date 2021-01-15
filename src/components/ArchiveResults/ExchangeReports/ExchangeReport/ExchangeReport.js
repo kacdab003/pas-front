@@ -1,12 +1,11 @@
 import React from 'react';
-import { StyledExchangeReportResult } from './StyledArchiveResult';
+
 import moment from 'moment';
+import { StyledExchangeReport } from './StyledExchangeReport';
 
-const ExchangeReportResult = (props) => {
-  const { newModule, exchangeWorker, damagedModule, objectNumber, exchangeDate } = props.exchangeReportObject;
-
+const ExchangeReport = ({ newModule, exchangeWorker, damagedModule, objectNumber, exchangeDate }) => {
   return (
-    <StyledExchangeReportResult>
+    <StyledExchangeReport>
       <div>
         Numer modułu: <span>{newModule?.moduleNumber}</span>
       </div>
@@ -22,8 +21,8 @@ const ExchangeReportResult = (props) => {
       <div>
         Data wymiany: <span> {moment(exchangeDate).format('YYYY-MM-DD hh:mm')}</span>
       </div>
-    </StyledExchangeReportResult>
+    </StyledExchangeReport>
   );
 };
 
-export default ExchangeReportResult;
+export default ExchangeReport;
