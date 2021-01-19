@@ -9,11 +9,23 @@ export const StyledSubmitButton = styled.button`
   color: white;
   transition: ease-in-out 0.2s;
   &:hover {
-    color: #e62a94;
+    ${(props) =>
+      props.disabled
+        ? `color: black;
+    background-color: darkgrey;
+    cursor: not-allowed;`
+        : `color: #e62a94;
     background-color: white;
     border: 1px solid #e62a94;
-    cursor: pointer;
+    cursor: pointer;`}
   }
+
+  ${(props) =>
+    props.disabled
+      ? `color: black;
+    background-color: darkgrey;
+    border: 1px solid black;`
+      : null}
 `;
 
 export const SubmitButtonWrapper = styled.div`

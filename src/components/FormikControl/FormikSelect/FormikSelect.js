@@ -28,7 +28,6 @@ const FormikSelect = (props) => {
             </option>
           );
           optionsArr.unshift(defaultOption);
-          console.log('HALO', optionsArr);
           setOptionsState(optionsArr);
         } catch (error) {
           console.log(error);
