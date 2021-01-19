@@ -3,9 +3,6 @@ import { FormSectionWrapper } from './StyledNewReportForm';
 import newReportForms from '../../../shared/config/forms/newReport';
 import SeparateLine from '../../../components/UI/SeparateLine/SeparateLine';
 import SubmitButton from '../../../components/SubmitButton/SubmitButton';
-import ObjectForm from './ObjectForm/ObjectForm';
-import ObjectResults from './ObjectResults/ObjectResults';
-
 import { Formik, Form } from 'formik';
 import newReportValidationSchema from '../../../shared/config/forms/newReportValidationSchema';
 import generateFormikControlsFromConfig from '../../../shared/config/forms/generateFormikControlsFromConfig';
