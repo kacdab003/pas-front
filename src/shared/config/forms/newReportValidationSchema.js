@@ -12,7 +12,7 @@ const newReportValidationSchema = Yup.object({
   rms: Yup.string()
     .required('Pole wymagane')
     .matches(/\b(?:ZAL|WYL)\b/),
-  objects: Yup.array(),
+  //objects: Yup.array(),
   pump: Yup.string()
     .required('Pole wymagane')
     .matches(/\b(?:P1|P2)\b/),

@@ -2,12 +2,14 @@ import React from 'react';
 import { FormSectionWrapper } from './StyledNewReportForm';
 import newReportForms from '../../../shared/config/forms/newReport';
 import SeparateLine from '../../../components/UI/SeparateLine/SeparateLine';
+import SubmitButton from '../../../components/SubmitButton/SubmitButton';
 import ObjectForm from './ObjectForm/ObjectForm';
 import ObjectResults from './ObjectResults/ObjectResults';
 
 import { Formik, Form } from 'formik';
 import newReportValidationSchema from '../../../shared/config/forms/newReportValidationSchema';
 import generateFormikControlsFromConfig from '../../../shared/config/forms/generateFormikControlsFromConfig';
+import FormikSelect from '../../../components/FormikControl/FormikSelect/FormikSelect';
 
 const NewReportForm = () => {
   const initialValues = {
@@ -45,21 +47,32 @@ const NewReportForm = () => {
 
   const onSubmit = (values) => {
     console.log('Dane: ', values);
-
     console.log('Dane zdżejsonowane: ', JSON.parse(JSON.stringify(values)));
   };
 
   return (
     <Formik initialValues={initialValues} validationSchema={newReportValidationSchema} onSubmit={onSubmit}>
-      <Form>
-        <FormSectionWrapper rows={1} columns={2}>
-          {generateFormikControlsFromConfig(newReportForms.firstSection)}
-        </FormSectionWrapper>
-        <FormSectionWrapper rows={12} columns={3}>
-          {generateFormikControlsFromConfig(newReportForms.secondSection)}
-        </FormSectionWrapper>
-        <SeparateLine />
-      </Form>
+      {(formik) => {
+        const isDisabled = !formik.isValid || !formik.dirty;
+
+        const buttonProps = {
+          type: 'submit',
+          disabled: isDisabled,
+        };
+
+        return (
+          <Form>
+            <FormSectionWrapper rows={1} columns={2}>
+              {generateFormikControlsFromConfig(newReportForms.firstSection)}
+            </FormSectionWrapper>
+            <FormSectionWrapper rows={9} columns={3}>
+              {generateFormikControlsFromConfig(newReportForms.secondSection)}
+            </FormSectionWrapper>
+            <SeparateLine />
+            <SubmitButton buttonProps={buttonProps} title="Wyślij" />
+          </Form>
+        );
+      }}
     </Formik>
   );
 };
