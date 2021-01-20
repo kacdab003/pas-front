@@ -170,7 +170,7 @@ const ArchiveResults = () => {
   if (singleReportView) {
     const initialValues = {
       nr: singleReportData.nr,
-      workers: [singleReportData.workers[0], singleReportData.workers[1]],
+      workers: [singleReportData.workers[0]._id, singleReportData.workers[1]._id],
       configuration: singleReportData.configuration,
       pwr_set: singleReportData.pwr_set,
       mod_set: singleReportData.mod_set,
@@ -206,6 +206,7 @@ const ArchiveResults = () => {
         <button onClick={backButtonHandler}>WRÓĆ</button>
         <Formik initialValues={initialValues} validationSchema={newReportValidationSchema} onSubmit={onSubmit}>
           {(formik) => {
+            console.log(formik.values);
             const isDisabled = !formik.isValid && !formik.dirty;
 
             const buttonProps = {
