@@ -11,6 +11,11 @@ const ModuleGroup = (props) => {
     const moduleToUpdate = updatedModules[moduleIndex];
     moduleToUpdate[event.target.name] = event.target.value;
 
+    props.form.setFieldValue(
+      `objects[${props.objectIndex}].U[${moduleIndex}].${event.target.name}`,
+      event.target.value
+    );
+
     setModules([...updatedModules]);
   };
 
