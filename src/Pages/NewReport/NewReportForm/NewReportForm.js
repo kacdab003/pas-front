@@ -12,7 +12,7 @@ import generateFormikControlsFromConfig from '../../../shared/config/forms/gener
 
 const NewReportForm = () => {
   const initialValues = {
-    nr: 0,
+    nr: '',
     workers: ['', ''],
     configuration: '',
     pwr_set: 0,
@@ -64,6 +64,7 @@ const NewReportForm = () => {
             <FormSectionWrapper rows={1} columns={2}>
               {generateFormikControlsFromConfig(newReportForms.firstSection)}
             </FormSectionWrapper>
+            <SeparateLine />
             <FormSectionWrapper rows={9} columns={3}>
               {generateFormikControlsFromConfig(newReportForms.secondSection)}
             </FormSectionWrapper>
