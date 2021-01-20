@@ -12,10 +12,11 @@ export const StyledNavbarItem = styled.li`
   }
 `;
 
-export const StyledNavbarItemIcon = styled.img`
+export const StyledNavbarItemIcon = styled.div`
   width: 1.5rem;
   height: 1.5rem;
   margin: 0 1rem;
+  background-image: url(${(props) => props.backgroundImg});
 `;
 
 export const StyledNavlink = styled(NavLink)`
@@ -24,7 +25,7 @@ export const StyledNavlink = styled(NavLink)`
   color: white;
   text-decoration: none;
   &.active {
-    opacity: 0.5;
+    background-color: rgba(255, 255, 255, 0.3);
   }
   &:hover {
     cursor: pointer;
