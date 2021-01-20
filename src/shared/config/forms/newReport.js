@@ -272,6 +272,13 @@ const newReportForms = {
       placeholder: 'Opis',
     },
   ],
+  thirdSection: [
+    {
+      control: 'fieldarray',
+      label: 'Obiekty',
+      name: 'objects',
+    },
+  ],
 };
 
 export default newReportForms;

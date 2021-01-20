@@ -16,7 +16,7 @@ const NewReportForm = () => {
     mod_set: 0,
     module: '',
     rms: '',
-    objects: [{}],
+    objects: [{ name: '', T1: 0, T2: 0, T3: 0, C1: 0, U: [{ moduleNumber: '' }] }],
     pump: '',
     pressure: 0,
     temperatureIn: 0,
@@ -49,6 +49,7 @@ const NewReportForm = () => {
   return (
     <Formik initialValues={initialValues} validationSchema={newReportValidationSchema} onSubmit={onSubmit}>
       {(formik) => {
+        console.log('FORMIK', formik);
         const isDisabled = !formik.isValid || !formik.dirty;
 
         const buttonProps = {
@@ -65,6 +66,8 @@ const NewReportForm = () => {
             <FormSectionWrapper rows={9} columns={3}>
               {generateFormikControlsFromConfig(newReportForms.secondSection)}
             </FormSectionWrapper>
+            <SeparateLine />
+            {generateFormikControlsFromConfig(newReportForms.thirdSection)}
             <SeparateLine />
             <SubmitButton buttonProps={buttonProps} title="Wyślij" />
           </Form>

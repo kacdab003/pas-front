@@ -1,7 +1,7 @@
 import React from 'react';
 import SubmitButton from '../../../../components/SubmitButton/SubmitButton';
 import { SecondaryHeader } from '../../../../components/UI/Headers/Headers';
-import generateInputsFromConfig from '../../../../shared/config/forms/generateInputsFromConfig';
+import generateFormikControlsFromConfig from '../../../../shared/config/forms/generateInputsFromConfig';
 import newReportForms from '../../../../shared/config/forms/newReport';
 import { StyledObjectForm } from './StyledObjectForm';
 
@@ -14,10 +14,10 @@ const ObjectForm = (props) => {
   return (
     <div>
       <SecondaryHeader>Obiekty</SecondaryHeader>
-      <StyledObjectForm>
-        {generateInputsFromConfig(newReportForms.objectForm)}
-        <SubmitButton title={'Dodaj'} buttonProps={{ onClick: handler }} />
-      </StyledObjectForm>
+      {/* <StyledObjectForm> */}
+      {generateFormikControlsFromConfig(newReportForms.objectForm)}
+      {/* <SubmitButton title={'Dodaj'} buttonProps={{ onClick: handler }} /> */}
+      {/* </StyledObjectForm> */}
     </div>
   );
 };
