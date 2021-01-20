@@ -37,20 +37,31 @@ const FormikSelect = (props) => {
     }
   }, [refKey, refEndpoint, defaultOptionLabel, shouldFetchOptions]);
 
+  const mapPropOptions = () => {
+    const mappedPropOptions = options.map((option) => {
+      return (
+        <option key={option.value} value={option.value}>
+          {option.text}
+        </option>
+      );
+    });
+
+    const defaultOption = (
+      <option value="" key={'DEFAULT'} selected disabled>
+        {defaultOptionLabel}
+      </option>
+    );
+    mappedPropOptions.unshift(defaultOption);
+
+    return mappedPropOptions;
+  };
+
   return (
     <StyledFormikSelectWrapper>
       <div className="form-control">
         <StyledFormikLabel htmlFor={name}>{label}</StyledFormikLabel>
-        <StyledFormikSelect as="select" id={name} name={name} {...otherProps}>
-          {!shouldFetchOptions
-            ? options.map((option) => {
-                return (
-                  <option key={option.value} value={option.value}>
-                    {option.text}
-                  </option>
-                );
-              })
-            : optionsState}
+        <StyledFormikSelect component="select" id={name} name={name} {...otherProps}>
+          {!shouldFetchOptions ? mapPropOptions() : optionsState}
         </StyledFormikSelect>
         <ErrorMessage component={FormikError} name={name} />
       </div>

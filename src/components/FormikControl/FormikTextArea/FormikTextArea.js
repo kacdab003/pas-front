@@ -9,7 +9,7 @@ const FormikTextArea = (props) => {
   return (
     <StyledFormikTextAreaWrapper>
       <StyledFormikLabel htmlFor={name}>{label}</StyledFormikLabel>
-      <StyledFormikTextArea as="textarea" id={name} name={name} {...otherProps} />
+      <StyledFormikTextArea component="textarea" id={name} name={name} {...otherProps} />
       <ErrorMessage component={FormikError} name={name} />
     </StyledFormikTextAreaWrapper>
   );
