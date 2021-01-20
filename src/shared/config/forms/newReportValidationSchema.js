@@ -1,7 +1,18 @@
 import * as Yup from 'yup';
 
+Yup.setLocale({
+  number: {
+    min: 'Wartość nie może być mniejsza niż ${min}',
+    max: 'Wartość nie może przekroczyć ${max}',
+  },
+  string: {
+    min: 'Wartość nie może być krótsza niż ${min} znaki',
+    max: 'Wartość nie może przekroczyć ${max} znaków',
+  },
+});
+
 const newReportValidationSchema = Yup.object({
-  nr: Yup.number().nullable().required('Pole wymagane').min(1).max(50),
+  nr: Yup.string().required('Pole wymagane').min(1).max(50),
   workers: Yup.array().of(Yup.string().required('Pole wymagane')).length(2),
   configuration: Yup.string()
     .required('Pole wymagane')

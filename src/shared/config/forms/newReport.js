@@ -6,8 +6,8 @@ const newReportForms = {
       control: 'input',
       label: 'Numer',
       name: 'nr',
-      type: 'number',
-      placeholder: '0',
+      type: 'text',
+      placeholder: '1234/2021',
     },
     {
       control: 'select',
