@@ -61,6 +61,7 @@ const NewReportForm = () => {
             <FormSectionWrapper rows={1} columns={2}>
               {generateFormikControlsFromConfig(newReportForms.firstSection)}
             </FormSectionWrapper>
+            <SeparateLine />
             <FormSectionWrapper rows={9} columns={3}>
               {generateFormikControlsFromConfig(newReportForms.secondSection)}
             </FormSectionWrapper>
