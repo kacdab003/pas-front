@@ -9,17 +9,34 @@ export const StyledFormikFieldArrayWrapper = styled.div`
   margin: auto;
 `;
 
-export const StyledDamagedModules = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid black;
-  padding: 0.5rem;
+export const StyledDamagedObjectsWrapper = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 `;
 
-export const StyledDamagedButton = styled.button`
-  width: 1rem;
-  height: 1rem;
+export const StyledObject = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(3, 1fr);
+  border: #005fee 1px solid;
+  margin: 1rem 2rem;
+  padding: 1rem;
+  box-shadow: 5px 5px 26px 5px #000000;
+  border-radius: 21px;
+`;
+
+export const StyledDamagedModule = styled.div``;
+
+export const StyledDamagedModules = styled.div`
+  width: 100%;
+  grid-column: 1 / 3;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  align-content: center;
+  display: grid;
+  border: 1px solid black;
+  padding: 1rem;
+  margin: 1rem auto;
+  border-radius: 21px;
+  padding: 0.5rem;
 `;

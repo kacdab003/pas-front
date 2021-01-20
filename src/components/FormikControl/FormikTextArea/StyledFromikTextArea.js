@@ -12,8 +12,10 @@ export const StyledFormikTextAreaWrapper = styled.div`
 
 export const StyledFormikTextArea = styled(Field)`
   width: 80%;
+  height: 5rem;
+  resize: vertical;
   padding: 1rem;
-  height: 3rem;
+  font-family: inherit;
   border: 1px solid black;
   border-radius: 5px;
   font-size: 1.1rem;

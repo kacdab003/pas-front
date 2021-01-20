@@ -35,6 +35,23 @@ const newReportForms = {
   secondSection: [
     {
       control: 'select',
+      label: 'rms',
+      name: 'rms',
+      shouldFetchOptions: false,
+      options: [
+        {
+          text: 'ZAŁ',
+          value: 'ZAL',
+        },
+        {
+          text: 'WYŁ',
+          value: 'WYL',
+        },
+      ],
+      defaultOptionLabel: 'Wybierz RMS',
+    },
+    {
+      control: 'select',
       label: 'konfiguracja',
       name: 'configuration',
       placeholder: '',
@@ -60,6 +77,42 @@ const newReportForms = {
       defaultOptionLabel: 'Wybierz konfigurację',
     },
     {
+      control: 'select',
+      label: 'dab_exciter',
+      name: 'dabExciter',
+      shouldFetchOptions: false,
+      options: [
+        {
+          text: 'A',
+          value: 'A',
+        },
+        {
+          text: 'B',
+          value: 'B',
+        },
+      ],
+      defaultOptionLabel: 'Wybierz moduł',
+    },
+    {
+      control: 'select',
+      label: 'Pompa',
+      name: 'pump',
+      shouldFetchOptions: false,
+      options: [
+        {
+          text: 'P1',
+          value: 'P1',
+        },
+        {
+          text: 'P2',
+          value: 'P2',
+        },
+      ],
+      defaultOptionLabel: 'Wybierz pompę',
+    },
+  ],
+  thirdSection: [
+    {
       control: 'input',
       label: 'pwr_set',
       name: 'pwr_set',
@@ -79,40 +132,6 @@ const newReportForms = {
       name: 'module',
       type: 'text',
       placeholder: 'ABB4',
-    },
-    {
-      control: 'select',
-      label: 'rms',
-      name: 'rms',
-      shouldFetchOptions: false,
-      options: [
-        {
-          text: 'ZAŁ',
-          value: 'ZAL',
-        },
-        {
-          text: 'WYŁ',
-          value: 'WYL',
-        },
-      ],
-      defaultOptionLabel: 'Wybierz RMS',
-    },
-    {
-      control: 'select',
-      label: 'Pompa',
-      name: 'pump',
-      shouldFetchOptions: false,
-      options: [
-        {
-          text: 'P1',
-          value: 'P1',
-        },
-        {
-          text: 'P2',
-          value: 'P2',
-        },
-      ],
-      defaultOptionLabel: 'Wybierz pompę',
     },
     {
       control: 'input',
@@ -178,37 +197,6 @@ const newReportForms = {
       placeholder: '0',
     },
     {
-      control: 'checkbox',
-      label: 'Oświetlenie przeszkodowe',
-      name: 'lighting',
-      type: 'checkbox',
-      placeholder: '',
-    },
-    {
-      control: 'checkbox',
-      label: 'Kaseta',
-      name: 'isCassetteOpened',
-      type: 'checkbox',
-      placeholder: '',
-    },
-    {
-      control: 'select',
-      label: 'dab_exciter',
-      name: 'dabExciter',
-      shouldFetchOptions: false,
-      options: [
-        {
-          text: 'A',
-          value: 'A',
-        },
-        {
-          text: 'B',
-          value: 'B',
-        },
-      ],
-      defaultOptionLabel: 'Wybierz moduł',
-    },
-    {
       control: 'input',
       label: 'dab_moc_wyj',
       name: 'dabPowerOut',
@@ -264,6 +252,24 @@ const newReportForms = {
       type: 'number',
       placeholder: '0',
     },
+  ],
+  fourthSection: [
+    {
+      control: 'checkbox',
+      label: 'Oświetlenie przeszkodowe',
+      name: 'lighting',
+      type: 'checkbox',
+      placeholder: '',
+    },
+    {
+      control: 'checkbox',
+      label: 'Kaseta',
+      name: 'isCassetteOpened',
+      type: 'checkbox',
+      placeholder: '',
+    },
+  ],
+  fifthSection: [
     {
       control: 'textarea',
       label: 'zdarzenie',
@@ -272,7 +278,7 @@ const newReportForms = {
       placeholder: 'Opis',
     },
   ],
-  thirdSection: [
+  sixthSection: [
     {
       control: 'fieldarray',
       label: 'Obiekty',

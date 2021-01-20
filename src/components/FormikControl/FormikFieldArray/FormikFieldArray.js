@@ -1,9 +1,16 @@
-import { ErrorMessage, Field, FieldArray } from 'formik';
+import { ErrorMessage, FieldArray } from 'formik';
 import React from 'react';
+import AddRemoveButton from '../../AddRemoveButton/AddRemoveButton';
 import FormikError from '../FormikError/FormikError';
 import FormikInput from '../FormikInput/FormikInput';
 import { StyledFormikLabel } from '../FormikLabel/StyledFormikLabel';
-import { StyledDamagedButton, StyledDamagedModules, StyledFormikFieldArrayWrapper } from './StyledFormikFieldArray';
+import {
+  StyledDamagedModules,
+  StyledFormikFieldArrayWrapper,
+  StyledDamagedObjectsWrapper,
+  StyledObject,
+  StyledDamagedModule,
+} from './StyledFormikFieldArray';
 
 const FormikFieldArray = (props) => {
   const { label, name, ...otherProps } = props;
@@ -13,15 +20,19 @@ const FormikFieldArray = (props) => {
       <StyledFormikLabel htmlFor={name}>{label}</StyledFormikLabel>
       <FieldArray id={name} name={name} {...otherProps}>
         {(fieldArrayProps) => {
-          console.log('fieldArrayProps', fieldArrayProps);
-          const { push, remove, form } = fieldArrayProps;
+          const { push: objectPush, remove: objectRemove, form } = fieldArrayProps;
           const { values } = form;
           const { objects } = values;
 
           return (
-            <div>
+            <StyledDamagedObjectsWrapper>
               {objects.map((object, index) => (
-                <div key={index}>
+                <StyledObject key={index}>
+                  <AddRemoveButton
+                    onAdd={() => objectPush({ name: '', T1: 0, T2: 0, T3: 0, C1: 0, U: [{ moduleNumber: '' }] })}
+                    onRemove={() => objectRemove(index)}
+                  />{' '}
+                  {/*Wyrzuć to poza instancję per obiekt i zrób jeden globalny komponent */}
                   <FormikInput
                     id={`objects[${index}].name`}
                     name={`objects[${index}].name`}
@@ -33,49 +44,42 @@ const FormikFieldArray = (props) => {
                   <FormikInput id={`objects[${index}].T3`} name={`objects[${index}].T3`} label="T3" type="number" />
                   <FormikInput id={`objects[${index}].C1`} name={`objects[${index}].C1`} label="C1" type="number" />
                   <FieldArray id={`objects[${index}].U`} name={`objects[${index}].U`}>
-                    {(nestedFieldArrayProps) => {
-                      const { push: nestedPush, remove: nestedRemove, form } = nestedFieldArrayProps;
+                    {(moduleFieldArrayProps) => {
+                      console.log(moduleFieldArrayProps);
+                      const { push: modulePush, remove: moduleRemove, form } = moduleFieldArrayProps;
                       const { values } = form;
-                      const { objects } = values;
-                      console.log('NESTED OBJECTS', objects);
+                      const { objects: nestedObjects } = values;
 
                       return (
-                        <div>
-                          {objects.map((object, nestedIndex) => (
-                            <StyledDamagedModules key={nestedIndex}>
-                              <FormikInput
-                                id={`objects[${index}].U[${nestedIndex}].moduleNumber`}
-                                name={`objects[${index}].U[${nestedIndex}].moduleNumber`}
-                                label="Numer modułu"
-                                type="text"
-                              />
-
-                              <StyledDamagedButton type="button" onClick={() => nestedRemove(nestedIndex)}>
-                                {' '}
-                                -{' '}
-                              </StyledDamagedButton>
-
-                              <StyledDamagedButton type="button" onClick={() => nestedPush({ moduleNumber: '' })}>
-                                {' '}
-                                +{' '}
-                              </StyledDamagedButton>
-                            </StyledDamagedModules>
-                          ))}
-                        </div>
+                        <StyledDamagedModules>
+                          {nestedObjects.map((object, objIndex) =>
+                            object.U.map((module, moduleIndex) => {
+                              return (
+                                <StyledDamagedModule key={moduleIndex}>
+                                  <FormikInput
+                                    id={`objects[${objIndex}].U[${moduleIndex}].moduleNumber`}
+                                    name={`objects[${objIndex}].U[${moduleIndex}].moduleNumber`}
+                                    label="Numer modułu"
+                                    type="text"
+                                  />
+                                  <AddRemoveButton
+                                    type="button"
+                                    buttonType="+"
+                                    onAdd={() => modulePush({ moduleNumber: '' })}
+                                    onRemove={() => moduleRemove(moduleIndex)}
+                                  />{' '}
+                                  {/*Tak samo tutaj, powinno być jeden na - per moduł i globalny + */}
+                                </StyledDamagedModule>
+                              );
+                            })
+                          )}
+                        </StyledDamagedModules>
                       );
                     }}
                   </FieldArray>
-                  <button type="button" onClick={() => remove(index)}>
-                    {' '}
-                    -{' '}
-                  </button>
-                  <button type="button" onClick={() => push({ name: '', T1: 0, T2: 0, T3: 0, C1: 0, U: [''] })}>
-                    {' '}
-                    +{' '}
-                  </button>
-                </div>
+                </StyledObject>
               ))}
-            </div>
+            </StyledDamagedObjectsWrapper>
           );
         }}
       </FieldArray>

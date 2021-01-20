@@ -59,16 +59,27 @@ const NewReportForm = () => {
 
         return (
           <Form>
-            <FormSectionWrapper rows={1} columns={2}>
+            <FormSectionWrapper rows={1} columns={3}>
               {generateFormikControlsFromConfig(newReportForms.firstSection)}
             </FormSectionWrapper>
             <SeparateLine />
-            <FormSectionWrapper rows={9} columns={3}>
+            <FormSectionWrapper rows={1} columns={4}>
               {generateFormikControlsFromConfig(newReportForms.secondSection)}
             </FormSectionWrapper>
             <SeparateLine />
-            {generateFormikControlsFromConfig(newReportForms.thirdSection)}
+            <FormSectionWrapper rows={4} columns={6}>
+              {generateFormikControlsFromConfig(newReportForms.thirdSection)}
+            </FormSectionWrapper>
             <SeparateLine />
+            <FormSectionWrapper rows={1} columns={2}>
+              {generateFormikControlsFromConfig(newReportForms.fourthSection)}
+            </FormSectionWrapper>
+            <SeparateLine />
+            {generateFormikControlsFromConfig(newReportForms.sixthSection)}
+            <SeparateLine />
+            <FormSectionWrapper rows={1} columns={1}>
+              {generateFormikControlsFromConfig(newReportForms.fifthSection)}
+            </FormSectionWrapper>
             <SubmitButton buttonProps={buttonProps} title="Wyślij" />
           </Form>
         );
