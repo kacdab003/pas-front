@@ -6,7 +6,6 @@ import SubmitButton from '../../../components/SubmitButton/SubmitButton';
 import { Formik, Form } from 'formik';
 import newReportValidationSchema from '../../../shared/config/forms/newReportValidationSchema';
 import generateFormikControlsFromConfig from '../../../shared/config/forms/generateFormikControlsFromConfig';
-import FormikSelect from '../../../components/FormikControl/FormikSelect/FormikSelect';
 
 const NewReportForm = () => {
   const initialValues = {

@@ -13,7 +13,7 @@ Yup.setLocale({
 });
 
 const newReportValidationSchema = Yup.object({
-  nr: Yup.string().required('Pole wymagane').min(1).max(50),
+  nr: Yup.number().nullable().required('Pole wymagane').min(1).max(50),
   workers: Yup.array().of(Yup.string().required('Pole wymagane')).length(2),
   configuration: Yup.string()
     .required('Pole wymagane')
