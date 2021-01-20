@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Field } from 'formik';
 
 export const StyledFormikSelectWrapper = styled.div`
   width: 100%;
@@ -9,7 +10,7 @@ export const StyledFormikSelectWrapper = styled.div`
   margin: auto;
 `;
 
-export const StyledFormikSelect = styled.select`
+export const StyledFormikSelect = styled(Field)`
   width: 80%;
   padding: 0.5rem;
   height: 3rem;

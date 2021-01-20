@@ -9,7 +9,6 @@ import ObjectResults from './ObjectResults/ObjectResults';
 import { Formik, Form } from 'formik';
 import newReportValidationSchema from '../../../shared/config/forms/newReportValidationSchema';
 import generateFormikControlsFromConfig from '../../../shared/config/forms/generateFormikControlsFromConfig';
-import FormikSelect from '../../../components/FormikControl/FormikSelect/FormikSelect';
 
 const NewReportForm = () => {
   const initialValues = {
@@ -30,7 +29,7 @@ const NewReportForm = () => {
     waterCounter: 0,
     openingLevelA: 0,
     openingLevelB: 0,
-    supplyAmmount: 0,
+    supplyAmount: 0,
     lighting: false,
     isCassetteOpened: false,
     dabExciter: '',
