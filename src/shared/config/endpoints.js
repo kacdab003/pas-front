@@ -7,11 +7,13 @@ export const userAuthEndpoints = {
 
 export const archiveEndpoints = {
   get: API_URL + '/reports',
+  delete: API_URL + '/reports/',
 };
 
 export const exchangeReportEndpoints = {
   post: API_URL + '/exchangeReports',
   get: API_URL + '/exchangeReports',
+  delete: API_URL + '/exchangeReports/',
 };
 
 export const objectEndpoints = {

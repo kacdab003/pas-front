@@ -10,6 +10,13 @@ import Message from '../../components/Message/Message';
 import ExchangeReportResult from './ArchiveResult/ExchangeReportResult';
 import { SecondaryHeader } from '../UI/Headers/Headers';
 import SearchBar from '../SearchBar/SearchBar';
+import { FormSectionWrapper } from '../../Pages/NewReport/NewReportForm/StyledNewReportForm';
+import newReportForms from '../../shared/config/forms/newReport';
+import SeparateLine from '../UI/SeparateLine/SeparateLine';
+import SubmitButton from '../SubmitButton/SubmitButton';
+import { Formik, Form } from 'formik';
+import generateFormikControlsFromConfig from '../../shared/config/forms/generateFormikControlsFromConfig';
+import newReportValidationSchema from '../../shared/config/forms/newReportValidationSchema';
 
 const ArchiveResults = () => {
   const [fetchedReports, setFetchedReports] = useState([]);
@@ -20,18 +27,37 @@ const ArchiveResults = () => {
   const [exchangeReportsSearchText, setExchangeReportsSearchText] = useState('');
   const [filteredReports, setFilteredReports] = useState(fetchedReports);
   const [filteredExchangeReports, setFilteredExchangeReports] = useState(fetchedExchangeReports);
+  const [singleReportData, setSingleReportData] = useState({});
+  const [singleReportView, setSingleReportView] = useState(false);
+  const [isReportEditing, setIsReportEditing] = useState(false);
 
-  const state = {
-    fetchedReports,
-    fetchedExchangeReports,
-    isLoading,
-    error,
-    reportsSearchText,
-    exchangeReportsSearchText,
-    filteredReports,
-    filteredExchangeReports,
+  const fetchArchiveResults = async () => {
+    try {
+      const [reports, { data: exchangeReportsData }] = await axios.all([
+        axios.get(archiveEndpoints.get),
+        axios.get(exchangeReportEndpoints.get),
+      ]);
+
+      const filteredResults = reports.data.map((result) => ({
+        key: result._id,
+        id: result.nr,
+        date: moment(result.createdAt).format('YYYY-MM-DD hh:mm'),
+        configuration: result.configuration,
+        fullName: result.workers[0]?.fullName,
+        office: result.workers[0]?.position === 'ENGINEER' ? 'INŻYNIER' : 'TECHNIK',
+      }));
+
+      setFetchedReports(filteredResults);
+      setFilteredReports(filteredResults);
+      setFetchedExchangeReports(exchangeReportsData);
+      setFilteredExchangeReports(exchangeReportsData);
+
+      setIsLoading(false);
+    } catch (error) {
+      setError(error?.response?.data || error.message);
+      setIsLoading(false);
+    }
   };
-  console.log('STATE', state);
 
   const onReportSearch = (searchPhrase = '') => {
     const searchResult = fetchedReports.filter((report) => {
@@ -67,35 +93,48 @@ const ArchiveResults = () => {
     onExchangeReportSearch(event.target.value || '');
   };
 
+  const openReportHandler = async (reportId) => {
+    setIsReportEditing(false);
+
+    await axios.get(archiveEndpoints.get + '/' + reportId).then((response) => {
+      console.log(response.data);
+      setSingleReportData(response.data);
+    });
+
+    setSingleReportView(true);
+  };
+
+  const editReportHandler = async (reportId) => {
+    openReportHandler(reportId);
+    setIsReportEditing(true);
+  };
+
+  const deleteReportHandler = async (reportId) => {
+    await axios.delete(archiveEndpoints.delete + reportId).then((response) => {
+      fetchArchiveResults();
+    });
+  };
+
+  const exchangeReportEditHandler = () => {
+    console.log('exchangeReportEditHandler is working');
+  };
+
+  const exchangeReportDeleteHandler = async (exchangeReportId) => {
+    await axios.delete(exchangeReportEndpoints.delete + exchangeReportId).then((response) => {
+      fetchArchiveResults();
+    });
+  };
+
+  const onSubmit = (values) => {
+    console.log('Dane: ', values);
+    console.log('Dane zdżejsonowane: ', JSON.parse(JSON.stringify(values)));
+  };
+
+  const backButtonHandler = () => {
+    setSingleReportView(false);
+  };
+
   useEffect(() => {
-    const fetchArchiveResults = async () => {
-      try {
-        const [reports, { data: exchangeReportsData }] = await axios.all([
-          axios.get(archiveEndpoints.get),
-          axios.get(exchangeReportEndpoints.get),
-        ]);
-
-        const filteredResults = reports.data.map((result) => ({
-          key: result._id,
-          id: result.nr,
-          date: moment(result.createdAt).format('YYYY-MM-DD hh:mm'),
-          configuration: result.configuration,
-          fullName: result.workers[0]?.fullName,
-          office: result.workers[0]?.position === 'ENGINEER' ? 'INŻYNIER' : 'TECHNIK',
-        }));
-
-        setFetchedReports(filteredResults);
-        setFilteredReports(filteredResults);
-        setFetchedExchangeReports(exchangeReportsData);
-        setFilteredExchangeReports(exchangeReportsData);
-
-        setIsLoading(false);
-      } catch (error) {
-        setError(error?.response?.data || error.message);
-        setIsLoading(false);
-      }
-    };
-
     fetchArchiveResults();
   }, []);
   if (isLoading) {
@@ -112,11 +151,86 @@ const ArchiveResults = () => {
       configuration={result.configuration}
       fullName={result.fullName}
       office={result.office}
+      openHandler={() => openReportHandler(result.key)}
+      editHandler={() => editReportHandler(result.key)}
+      deleteHandler={() => deleteReportHandler(result.key)}
     />
   ));
   const fetchedExchangeReportsElements = filteredExchangeReports.map((exchangeReport) => {
-    return <ExchangeReportResult key={exchangeReport._id} exchangeReportObject={exchangeReport} />;
+    return (
+      <ExchangeReportResult
+        key={exchangeReport._id}
+        exchangeReportObject={exchangeReport}
+        editHandler={exchangeReportEditHandler}
+        deleteHandler={() => exchangeReportDeleteHandler(exchangeReport._id)}
+      />
+    );
   });
+
+  if (singleReportView) {
+    const initialValues = {
+      nr: singleReportData.nr,
+      workers: [singleReportData.workers[0], singleReportData.workers[1]],
+      configuration: singleReportData.configuration,
+      pwr_set: singleReportData.pwr_set,
+      mod_set: singleReportData.mod_set,
+      module: singleReportData.module,
+      rms: singleReportData.rms,
+      objects: singleReportData.objects,
+      pump: singleReportData.pump,
+      pressure: singleReportData.pressure,
+      temperatureIn: singleReportData.temperatureIn,
+      temperatureOut: singleReportData.temperatureOut,
+      resistanceIn: singleReportData.resistanceIn,
+      resistanceOut: singleReportData.resistanceOut,
+      waterCounter: singleReportData.waterCounter,
+      openingLevelA: singleReportData.openingLevelA,
+      openingLevelB: singleReportData.openingLevelB,
+      supplyAmount: singleReportData.supplyAmount,
+      lighting: singleReportData.lighting,
+      isCassetteOpened: singleReportData.isCassetteOpened,
+      dabExciter: singleReportData.dabExciter,
+      dabPowerOut: singleReportData.dabPowerOut,
+      dabPowerReceived: singleReportData.dabPowerReceived,
+      dabMer: singleReportData.dabMer,
+      dabShoulderUp: singleReportData.dabShoulderUp,
+      dabShoulderDown: singleReportData.dabShoulderDown,
+      dabGeneral: singleReportData.dabGeneral,
+      dabTMA: singleReportData.dabTMA,
+      dabTMB: singleReportData.dabTMB,
+      accidentDescription: singleReportData.accidentDescription,
+    };
+
+    return (
+      <>
+        <button onClick={backButtonHandler}>WRÓĆ</button>
+        <Formik initialValues={initialValues} validationSchema={newReportValidationSchema} onSubmit={onSubmit}>
+          {(formik) => {
+            const isDisabled = !formik.isValid && !formik.dirty;
+
+            const buttonProps = {
+              type: 'submit',
+              disabled: isDisabled,
+            };
+
+            return (
+              <Form>
+                <FormSectionWrapper rows={1} columns={2}>
+                  {generateFormikControlsFromConfig(newReportForms.firstSection)}
+                </FormSectionWrapper>
+                <SeparateLine />
+                <FormSectionWrapper rows={9} columns={3}>
+                  {generateFormikControlsFromConfig(newReportForms.secondSection)}
+                </FormSectionWrapper>
+                <SeparateLine />
+                {isReportEditing ? <SubmitButton buttonProps={buttonProps} title="Zaktualizuj" /> : null}
+              </Form>
+            );
+          }}
+        </Formik>
+      </>
+    );
+  }
 
   return (
     <>
