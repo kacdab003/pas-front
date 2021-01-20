@@ -16,7 +16,16 @@ const NewReportForm = () => {
     mod_set: 0,
     module: '',
     rms: '',
-    objects: [{ name: '', T1: 0, T2: 0, T3: 0, C1: 0, U: [{ moduleNumber: '' }] }],
+    objects: [
+      {
+        name: '',
+        T1: 0,
+        T2: 0,
+        T3: 0,
+        C1: 0,
+        U: [{ moduleNumber: 0, socket: 0, type: '' }],
+      },
+    ],
     pump: '',
     pressure: 0,
     temperatureIn: 0,
@@ -42,12 +51,27 @@ const NewReportForm = () => {
   };
 
   const onSubmit = (values) => {
+    let filteredObjects = [];
+
+    values.objects.forEach((object) => {
+      const filteredModules = object.U.filter((module) => module.moduleNumber && module.type);
+      const filteredObject = { ...object, U: [...filteredModules] };
+      filteredObjects.push({ ...filteredObject });
+    });
+
+    console.log('WYFILTROWANE OBIEKTY', filteredObjects);
+
     console.log('Dane: ', values);
     console.log('Dane zdżejsonowane: ', JSON.parse(JSON.stringify(values)));
   };
 
   return (
-    <Formik initialValues={initialValues} validationSchema={newReportValidationSchema} onSubmit={onSubmit}>
+    <Formik
+      initialValues={initialValues}
+      validationSchema={newReportValidationSchema}
+      onSubmit={onSubmit}
+      validateOnChange={false}
+    >
       {(formik) => {
         console.log('FORMIK', formik);
         const isDisabled = !formik.isValid || !formik.dirty;

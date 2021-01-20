@@ -24,19 +24,3 @@ export const StyledObject = styled.div`
   box-shadow: 5px 5px 26px 5px #000000;
   border-radius: 21px;
 `;
-
-export const StyledDamagedModule = styled.div``;
-
-export const StyledDamagedModules = styled.div`
-  width: 100%;
-  grid-column: 1 / 3;
-  grid-template-columns: 1fr 1fr;
-  justify-items: center;
-  align-content: center;
-  display: grid;
-  border: 1px solid black;
-  padding: 1rem;
-  margin: 1rem auto;
-  border-radius: 21px;
-  padding: 0.5rem;
-`;

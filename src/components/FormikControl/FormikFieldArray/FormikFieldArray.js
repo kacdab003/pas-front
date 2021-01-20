@@ -4,6 +4,8 @@ import AddRemoveButton from '../../AddRemoveButton/AddRemoveButton';
 import FormikError from '../FormikError/FormikError';
 import FormikInput from '../FormikInput/FormikInput';
 import { StyledFormikLabel } from '../FormikLabel/StyledFormikLabel';
+import FormikSelect from '../FormikSelect/FormikSelect';
+import ModuleGroup from '../ModuleGroup/ModuleGroup';
 import {
   StyledDamagedModules,
   StyledFormikFieldArrayWrapper,
@@ -43,40 +45,7 @@ const FormikFieldArray = (props) => {
                   <FormikInput id={`objects[${index}].T2`} name={`objects[${index}].T2`} label="T2" type="number" />
                   <FormikInput id={`objects[${index}].T3`} name={`objects[${index}].T3`} label="T3" type="number" />
                   <FormikInput id={`objects[${index}].C1`} name={`objects[${index}].C1`} label="C1" type="number" />
-                  <FieldArray id={`objects[${index}].U`} name={`objects[${index}].U`}>
-                    {(moduleFieldArrayProps) => {
-                      console.log(moduleFieldArrayProps);
-                      const { push: modulePush, remove: moduleRemove, form } = moduleFieldArrayProps;
-                      const { values } = form;
-                      const { objects: nestedObjects } = values;
-
-                      return (
-                        <StyledDamagedModules>
-                          {nestedObjects.map((object, objIndex) =>
-                            object.U.map((module, moduleIndex) => {
-                              return (
-                                <StyledDamagedModule key={moduleIndex}>
-                                  <FormikInput
-                                    id={`objects[${objIndex}].U[${moduleIndex}].moduleNumber`}
-                                    name={`objects[${objIndex}].U[${moduleIndex}].moduleNumber`}
-                                    label="Numer modułu"
-                                    type="text"
-                                  />
-                                  <AddRemoveButton
-                                    type="button"
-                                    buttonType="+"
-                                    onAdd={() => modulePush({ moduleNumber: '' })}
-                                    onRemove={() => moduleRemove(moduleIndex)}
-                                  />{' '}
-                                  {/*Tak samo tutaj, powinno być jeden na - per moduł i globalny + */}
-                                </StyledDamagedModule>
-                              );
-                            })
-                          )}
-                        </StyledDamagedModules>
-                      );
-                    }}
-                  </FieldArray>
+                  <ModuleGroup object={object} objectIndex={index} />
                 </StyledObject>
               ))}
             </StyledDamagedObjectsWrapper>
