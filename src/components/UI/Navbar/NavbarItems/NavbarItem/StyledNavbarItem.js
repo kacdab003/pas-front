@@ -24,10 +24,12 @@ export const StyledNavlink = styled(NavLink)`
   align-items: center;
   color: white;
   text-decoration: none;
+  transition: ease-in-out 0.2s;
   &.active {
     background-color: rgba(255, 255, 255, 0.3);
   }
   &:hover {
     cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.3);
   }
 `;
