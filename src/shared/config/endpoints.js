@@ -1,4 +1,4 @@
-const API_URL = process.env.NODE_ENV === 'production' ? 'http://rcn-note-api.herokuapp.com' : 'http://localhost:3001';
+const API_URL = process.env.NODE_ENV === 'production' ? 'https://rcn-note-api.herokuapp.com' : 'http://localhost:3001';
 
 export const userAuthEndpoints = {
   login: API_URL + '/login',
