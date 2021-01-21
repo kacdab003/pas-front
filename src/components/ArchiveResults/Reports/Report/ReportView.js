@@ -84,7 +84,7 @@ const ReportView = (props) => {
     <>
       <h2>PODGLĄD RAPORTU NR: {initialValues.nr}</h2>
       <br />
-      <SubmitButton title="WRÓĆ" onClick={backButtonHandler} />
+      <SubmitButton title="WRÓĆ" buttonProps={{ onClick: backButtonHandler }} />
       <Formik initialValues={initialValues} validationSchema={newReportValidationSchema} validateOnChange={false}>
         {(formik) => {
           const isDisabled = !formik.isValid || !formik.dirty;

@@ -102,7 +102,7 @@ const ReportView = (props) => {
     <>
       <h2>EDYCJA RAPORTU NR: {initialValues.nr}</h2>
       <br />
-      <SubmitButton title="WRÓĆ" onClick={backButtonHandler} />
+      <SubmitButton title="WRÓĆ" buttonProps={{ onClick: backButtonHandler }} />
       <Formik
         initialValues={initialValues}
         validationSchema={newReportValidationSchema}
