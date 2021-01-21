@@ -28,11 +28,14 @@ const SignupForm = (props) => {
         position,
         password,
       };
+      if (password !== confirmPassword) {
+        throw new Error('Hasła nie są takie same!');
+      }
       await axios.put(userAuthEndpoints.signUp, authData);
-      setError('');
+
       props.onAuth(login, password);
     } catch (error) {
-      setError(error?.response?.data?.error || 'Unknown error');
+      setError(error?.response?.data?.error || error?.message || 'Unknown error');
     }
   };
   const onInputChange = (event, setter) => {
