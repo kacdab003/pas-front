@@ -12,6 +12,8 @@ export const archiveEndpoints = {
 export const exchangeReportEndpoints = {
   post: API_URL + '/exchangeReports',
   get: API_URL + '/exchangeReports',
+  patch: API_URL + '/exchangeReports/',
+  delete: API_URL + '/exchangeReports/',
 };
 
 export const newReportEndpoints = {

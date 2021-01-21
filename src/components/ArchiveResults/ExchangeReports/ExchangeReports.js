@@ -3,9 +3,11 @@ import Message from '../../Message/Message';
 import SearchBar from '../../SearchBar/SearchBar';
 import { ErrorResults } from '../StyledArchiveResults';
 import ExchangeReport from './ExchangeReport/ExchangeReport';
+import { useHistory } from 'react-router';
 
 const ExchangeReports = ({ exchangeReportsArray }) => {
   const [searchQuery, setSearchQuery] = useState('');
+  const history = useHistory();
 
   let mappedExchangeReports = exchangeReportsArray.data;
   if (searchQuery) {
@@ -21,7 +23,28 @@ const ExchangeReports = ({ exchangeReportsArray }) => {
       return isSearchResult;
     });
   }
-  const exchangeReportsToRender = mappedExchangeReports.map((exchangeReport) => <ExchangeReport {...exchangeReport} />);
+
+  const exchangeReportEditHandler = (reportId) => {
+    history.push({
+      pathname: '/exchange-report-edit',
+      state: reportId,
+    });
+  };
+
+  const exchangeReportDeleteHandler = (reportId) => {
+    history.push({
+      pathname: '/exchange-report-delete',
+      state: reportId,
+    });
+  };
+
+  const exchangeReportsToRender = mappedExchangeReports.map((exchangeReport) => (
+    <ExchangeReport
+      {...exchangeReport}
+      editHandler={() => exchangeReportEditHandler(exchangeReport._id)}
+      deleteHandler={() => exchangeReportDeleteHandler(exchangeReport._id)}
+    />
+  ));
   let content =
     exchangeReportsToRender.length === 0 ? (
       <ErrorResults>
