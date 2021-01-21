@@ -6,7 +6,6 @@ import exchangeReportConfig from '../../../shared/config/forms/exchangeReport';
 import { ExchangeReportFormWrapper, StyledExchangeReportForm } from './StyledExchangeReportForm';
 import axios from '../../../axios';
 import { exchangeReportEndpoints } from '../../../shared/config/endpoints';
-import FormSelect from '../../../components/FormSelect/FormSelect';
 import Message from '../../../components/Message/Message';
 import { hideMessage } from '../../../shared/utils/forms/formUtils';
 
@@ -57,17 +56,7 @@ const ExchangeReportForm = () => {
           label,
           onChange: inputChangedHandler,
         };
-        return (
-          <FormSelect
-            key={label}
-            defaultOptionLabel={defaultOptionLabel}
-            labelContent={label}
-            selectProps={selectProps}
-            refEndpoint={refEndpoint}
-            refKey={refKey}
-            onError={setError}
-          />
-        );
+        return <></>;
       }
     );
 

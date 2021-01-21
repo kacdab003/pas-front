@@ -1,26 +1,29 @@
 import styled from 'styled-components';
+import { Field } from 'formik';
 
-export const StyledSelectWrapper = styled.div`
+export const StyledFormikSelectWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin: auto;
+  & .form-control {
+    display: grid;
+    justify-items: center;
+    align-content: center;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
 `;
 
-export const StyledFormLabel = styled.label`
-  padding: 0.5rem;
-  text-transform: uppercase;
-`;
-
-export const StyledFormSelect = styled.select`
-  width: 80%;
+export const StyledFormikSelect = styled(Field)`
+  width: 15rem;
   padding: 0.5rem;
   height: 3rem;
   border: 1px solid black;
   border-radius: 5px;
   font-size: 1rem;
+
   option {
     color: black;
     background: white;
