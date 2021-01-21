@@ -23,12 +23,15 @@ const Reports = ({ reportsArray }) => {
 
   if (searchQuery) {
     mappedReportsElements = mappedReportsElements.filter((report) => {
+      const lowerCasedSearchQuery = searchQuery.toLowerCase().trim();
+
       const isSearchResult =
-        report?.key?.toString?.().includes?.(searchQuery) ||
-        report?.date?.toString?.().includes?.(searchQuery) ||
-        report?.configuration?.toString?.().includes?.(searchQuery) ||
-        report?.fullName?.toString?.().includes?.(searchQuery) ||
-        report?.office?.toString?.().includes?.(searchQuery);
+        report?.id?.toString?.()?.toLowerCase?.()?.includes?.(lowerCasedSearchQuery) ||
+        report?.key?.toString?.()?.toLowerCase?.()?.includes?.(lowerCasedSearchQuery) ||
+        report?.date?.toString?.()?.toLowerCase?.()?.includes?.(lowerCasedSearchQuery) ||
+        report?.configuration?.toString?.()?.toLowerCase?.()?.includes?.(lowerCasedSearchQuery) ||
+        report?.fullName?.toString?.()?.toLowerCase?.()?.includes?.(lowerCasedSearchQuery) ||
+        report?.office?.toString?.()?.toLowerCase?.()?.includes?.(lowerCasedSearchQuery);
       return isSearchResult;
     });
   }
