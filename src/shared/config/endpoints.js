@@ -7,6 +7,8 @@ export const userAuthEndpoints = {
 
 export const archiveEndpoints = {
   get: API_URL + '/reports',
+  delete: API_URL + '/reports/',
+  patch: API_URL + '/reports/',
 };
 
 export const exchangeReportEndpoints = {

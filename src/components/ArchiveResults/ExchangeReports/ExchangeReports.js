@@ -3,6 +3,7 @@ import Message from '../../Message/Message';
 import SearchBar from '../../SearchBar/SearchBar';
 import { ErrorResults } from '../StyledArchiveResults';
 import ExchangeReport from './ExchangeReport/ExchangeReport';
+
 import { useHistory } from 'react-router';
 
 const ExchangeReports = ({ exchangeReportsArray }) => {
@@ -12,6 +13,7 @@ const ExchangeReports = ({ exchangeReportsArray }) => {
   let mappedExchangeReports = exchangeReportsArray.data;
   if (searchQuery) {
     mappedExchangeReports = mappedExchangeReports.filter((report) => {
+
       const lowerCasedSearchQuery = searchQuery.toLowerCase().trim();
       const isSearchResult =
         report?.damagedModuleNumber?.toString?.()?.toLowerCase?.()?.includes?.(lowerCasedSearchQuery) ||
@@ -45,6 +47,7 @@ const ExchangeReports = ({ exchangeReportsArray }) => {
       deleteHandler={() => exchangeReportDeleteHandler(exchangeReport._id)}
     />
   ));
+  
   let content =
     exchangeReportsToRender.length === 0 ? (
       <ErrorResults>

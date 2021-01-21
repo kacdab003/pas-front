@@ -2,6 +2,7 @@ import React from 'react';
 
 import moment from 'moment';
 import { StyledExchangeReport } from './StyledExchangeReport';
+
 import { IconButton } from '../../../IconButton/IconButton';
 import editIcon from '../../../../assets/icons/edit.png';
 import deleteIcon from '../../../../assets/icons/delete.png';

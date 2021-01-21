@@ -23,7 +23,6 @@ export const StyledFormikSelect = styled(Field)`
   border: 1px solid black;
   border-radius: 5px;
   font-size: 1rem;
-
   option {
     color: black;
     background: white;

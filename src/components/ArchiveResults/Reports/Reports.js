@@ -6,9 +6,13 @@ import ReportHeader from '../ArchiveResultsHeader/ArchiveResultsHeader';
 import SearchBar from '../../SearchBar/SearchBar';
 import Message from '../../Message/Message';
 import { ErrorResults } from '../StyledArchiveResults';
+import { archiveEndpoints } from '../../../shared/config/endpoints';
+import axios from '../../../axios';
+import { useHistory } from 'react-router';
 
 const Reports = ({ reportsArray }) => {
   const [searchQuery, setSearchQuery] = useState('');
+  const history = useHistory();
 
   const reportsArrayData = reportsArray.data;
 
@@ -23,19 +27,46 @@ const Reports = ({ reportsArray }) => {
 
   if (searchQuery) {
     mappedReportsElements = mappedReportsElements.filter((report) => {
-      const lowerCasedSearchQuery = searchQuery.toLowerCase().trim();
 
       const isSearchResult =
-        report?.id?.toString?.()?.toLowerCase?.()?.includes?.(lowerCasedSearchQuery) ||
-        report?.key?.toString?.()?.toLowerCase?.()?.includes?.(lowerCasedSearchQuery) ||
-        report?.date?.toString?.()?.toLowerCase?.()?.includes?.(lowerCasedSearchQuery) ||
-        report?.configuration?.toString?.()?.toLowerCase?.()?.includes?.(lowerCasedSearchQuery) ||
-        report?.fullName?.toString?.()?.toLowerCase?.()?.includes?.(lowerCasedSearchQuery) ||
-        report?.office?.toString?.()?.toLowerCase?.()?.includes?.(lowerCasedSearchQuery);
+        report?.key?.toString?.().includes?.(searchQuery) ||
+        report?.date?.toString?.().includes?.(searchQuery) ||
+        report?.configuration?.toString?.().includes?.(searchQuery) ||
+        report?.fullName?.toString?.().includes?.(searchQuery) ||
+        report?.office?.toString?.().includes?.(searchQuery);
       return isSearchResult;
     });
   }
-  const reportsToRender = mappedReportsElements.map((report) => <Report {...report} />);
+
+  const openReportHandler = async (reportId) => {
+    history.push({
+      pathname: '/report',
+      state: reportId,
+    });
+  };
+
+  const editReportHandler = async (reportId) => {
+    history.push({
+      pathname: '/report-edit',
+      state: reportId,
+    });
+  };
+
+  const deleteReportHandler = async (reportId) => {
+    history.push({
+      pathname: '/report-remove',
+      state: reportId,
+    });
+  };
+
+  const reportsToRender = mappedReportsElements.map((report) => (
+    <Report
+      {...report}
+      openHandler={() => openReportHandler(report.key)}
+      editHandler={() => editReportHandler(report.key)}
+      deleteHandler={() => deleteReportHandler(report.key)}
+    />
+  ));
 
   let results =
     reportsToRender.length === 0 ? (

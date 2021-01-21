@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import AddRemoveButton from '../../AddRemoveButton/AddRemoveButton';
 import FormInput from '../../FormInput/FormInput';
+
 import { StyledModule, StyledModuleGroup, StyledModuleGroupSelect } from './StyledModuleGroup';
+
 
 const ModuleGroup = (props) => {
   const [modules, setModules] = useState([...props.object.U]);
@@ -58,7 +60,9 @@ const ModuleGroup = (props) => {
                 value: modules[moduleIndex].socket,
               }}
             />
+
             <StyledModuleGroupSelect
+
               id={'type'}
               name={'type'}
               label="Typ"
@@ -71,6 +75,7 @@ const ModuleGroup = (props) => {
               <option value="A">A</option>
               <option value="B">B</option>
             </StyledModuleGroupSelect>
+
             <AddRemoveButton
               type="button"
               buttonType="+"
