@@ -74,8 +74,6 @@ const NewReportForm = () => {
 
   return (
     <>
-      {error ? <Message message={error.message} messageType={'ERROR'} /> : null}
-      {formSubmitted ? <Message message={'Raport zapisany pomyślnie'} messageType={'SUCCESS'} /> : null}
       <Formik
         initialValues={initialValues}
         validationSchema={newReportValidationSchema}
@@ -113,6 +111,8 @@ const NewReportForm = () => {
               <FormSectionWrapper rows={1} columns={1}>
                 {generateFormikControlsFromConfig(newReportForms.fifthSection)}
               </FormSectionWrapper>
+              {error ? <Message message={error.message} messageType={'ERROR'} /> : null}
+              {formSubmitted ? <Message message={'Raport zapisany pomyślnie'} messageType={'SUCCESS'} /> : null}
               <SubmitButton buttonProps={buttonProps} title="Wyślij" />
             </Form>
           );
