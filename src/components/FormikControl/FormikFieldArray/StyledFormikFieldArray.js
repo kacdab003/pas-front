@@ -10,11 +10,16 @@ export const StyledFormikFieldArrayWrapper = styled.div`
 `;
 
 export const StyledDamagedObjectsWrapper = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const StyledObject = styled.div`
+  height: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: repeat(3, 1fr);
