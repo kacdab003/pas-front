@@ -47,7 +47,7 @@ const ReportView = (props) => {
         <h2>POMYŚLNIE USUNIĘTO RAPORT</h2>
       </center>
       <br />
-      <SubmitButton title="WRÓĆ" onClick={backButtonHandler} />
+      <SubmitButton title="WRÓĆ" buttonProps={{ onClick: backButtonHandler }} />
     </>
   );
 };

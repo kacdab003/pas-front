@@ -78,7 +78,7 @@ const ExchangeReportEdit = (props) => {
     <>
       <h2>EDYCJA RAPORTU: {initialValues.nr}</h2>
       <br />
-      <SubmitButton title="WRÓĆ" onClick={backButtonHandler} />
+      <SubmitButton title="WRÓĆ" buttonProps={{ onClick: backButtonHandler }} />
       <>
         {errorForm ? <Message message={error.message} messageType={'ERROR'} /> : null}
         {formSubmitted ? <Message message={'Raport zaktualizowany pomyślnie'} messageType={'SUCCESS'} /> : null}
