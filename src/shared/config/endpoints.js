@@ -1,4 +1,4 @@
-const API_URL = process.env.NODE_ENV === 'production' ? ' ' : 'http://localhost:3001';
+const API_URL = process.env.NODE_ENV === 'production' ? 'https://rcn-note-api.herokuapp.com' : 'http://localhost:3001';
 
 export const userAuthEndpoints = {
   login: API_URL + '/login',
@@ -8,12 +8,18 @@ export const userAuthEndpoints = {
 export const archiveEndpoints = {
   get: API_URL + '/reports',
   delete: API_URL + '/reports/',
+  patch: API_URL + '/reports/',
 };
 
 export const exchangeReportEndpoints = {
   post: API_URL + '/exchangeReports',
   get: API_URL + '/exchangeReports',
   delete: API_URL + '/exchangeReports/',
+};
+
+export const newReportEndpoints = {
+  post: API_URL + '/reports',
+  get: API_URL + '/reports',
 };
 
 export const objectEndpoints = {

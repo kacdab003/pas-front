@@ -3,12 +3,12 @@ import { StyledNavbarItem, StyledNavbarItemIcon, StyledNavlink } from './StyledN
 
 const NavbarItem = (props) => {
   return (
-    <StyledNavbarItem onClick={props.onToggle}>
-      <StyledNavlink exact={props.exact} to={props.path}>
-        <StyledNavbarItemIcon src={props.navIcon} alt={''} />
+    <StyledNavlink onClick={props.onToggle} exact={props.exact} to={props.path}>
+      <StyledNavbarItem>
+        <StyledNavbarItemIcon backgroundImg={props.navIcon} alt={''} />
         {props.title}
-      </StyledNavlink>
-    </StyledNavbarItem>
+      </StyledNavbarItem>
+    </StyledNavlink>
   );
 };
 

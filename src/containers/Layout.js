@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import Backdrop from '../components/UI/Backdrop/Backdrop';
 import Navbar from '../components/UI/Navbar/Navbar';
 import { authCheckState } from '../store/actions';
 import { StyledContainer, StyledLayout } from './StyledLayout';
@@ -14,6 +15,7 @@ const Layout = (props) => {
   return (
     <StyledLayout>
       <Navbar isOpen={isModalOpened} onToggle={toggleModalHandler} isAuthenticated={props.isAuthenticated} />
+      <Backdrop onClick={toggleModalHandler} show={isModalOpened} />
       <StyledContainer>{props.children}</StyledContainer>
     </StyledLayout>
   );

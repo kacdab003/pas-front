@@ -7,11 +7,17 @@ export const StyledFormikSelectWrapper = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin: auto;
+  & .form-control {
+    display: grid;
+    justify-items: center;
+    align-content: center;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
 `;
 
 export const StyledFormikSelect = styled(Field)`
-  width: 80%;
+  width: 15rem;
   padding: 0.5rem;
   height: 3rem;
   border: 1px solid black;
