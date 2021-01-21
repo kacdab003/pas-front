@@ -4,6 +4,7 @@ import axios from '../../../../axios';
 import CenteredLoader from '../../../UI/CenteredLoader/CenteredLoader';
 import Message from '../../../Message/Message';
 import { useHistory } from 'react-router';
+import SubmitButton from '../../../SubmitButton/SubmitButton';
 
 const ReportView = (props) => {
   const reportId = props.location.state;
@@ -46,7 +47,7 @@ const ReportView = (props) => {
         <h2>POMYŚLNIE USUNIĘTO RAPORT</h2>
       </center>
       <br />
-      <button onClick={backButtonHandler}>WRÓĆ</button>
+      <SubmitButton title="WRÓĆ" onClick={backButtonHandler} />
     </>
   );
 };
