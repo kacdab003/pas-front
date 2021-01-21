@@ -2,12 +2,12 @@ import styled from 'styled-components';
 
 export const StyledModuleGroup = styled.div`
   width: 100%;
+  max-height: 50%;
   grid-column: 1 / 3;
   grid-template-columns: 1fr 1fr;
-  justify-items: center;
-  align-content: center;
+  justify-content: center;
+  align-items: center;
   display: grid;
-  border: 1px solid black;
   padding: 1rem;
   margin: 1rem auto;
   border-radius: 21px;
@@ -19,12 +19,19 @@ export const StyledModule = styled.div`
   border-radius: 10px;
   padding: 1rem;
   margin: 0.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   box-shadow: 5px 5px 5px darkgrey;
 `;
 
 export const StyledModuleGroupSelect = styled.select`
-  width: 80%;
-  margin: auto;
+  margin: 1rem auto;
+  text-align: center;
+  grid-column: start/end;
+  align-self: center;
+  justify-self: center;
   padding: 0.5rem;
   height: 3rem;
   border: 1px solid black;
