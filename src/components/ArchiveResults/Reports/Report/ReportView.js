@@ -10,6 +10,7 @@ import SeparateLine from '../../../../components/UI/SeparateLine/SeparateLine';
 import CenteredLoader from '../../../UI/CenteredLoader/CenteredLoader';
 import Message from '../../../Message/Message';
 import { useHistory } from 'react-router';
+import SubmitButton from '../../../SubmitButton/SubmitButton';
 
 const ReportView = (props) => {
   const reportId = props.location.state;
@@ -83,7 +84,7 @@ const ReportView = (props) => {
     <>
       <h2>PODGLĄD RAPORTU NR: {initialValues.nr}</h2>
       <br />
-      <button onClick={backButtonHandler}>WRÓĆ</button>
+      <SubmitButton title="WRÓĆ" onClick={backButtonHandler} />
       <Formik initialValues={initialValues} validationSchema={newReportValidationSchema} validateOnChange={false}>
         {(formik) => {
           const isDisabled = !formik.isValid || !formik.dirty;
