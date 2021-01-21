@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FormSectionWrapper } from './StyledNewReportForm';
 import newReportForms from '../../../shared/config/forms/newReport';
 import SeparateLine from '../../../components/UI/SeparateLine/SeparateLine';
@@ -6,8 +6,15 @@ import SubmitButton from '../../../components/SubmitButton/SubmitButton';
 import { Formik, Form } from 'formik';
 import newReportValidationSchema from '../../../shared/config/forms/newReportValidationSchema';
 import generateFormikControlsFromConfig from '../../../shared/config/forms/generateFormikControlsFromConfig';
+import axios from 'axios';
+import Message from '../../../components/Message/Message';
+import { hideMessage } from '../../../shared/utils/forms/formUtils';
+import { newReportEndpoints } from '../../../shared/config/endpoints';
 
 const NewReportForm = () => {
+  const [error, setError] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
   const initialValues = {
     nr: '',
     workers: ['', ''],
@@ -50,65 +57,68 @@ const NewReportForm = () => {
     accidentDescription: '',
   };
 
+  const saveData = async (dataToSave) => {
+    try {
+      setError(false);
+      await axios.post(newReportEndpoints.post, dataToSave);
+      setFormSubmitted(true);
+      hideMessage(setFormSubmitted);
+    } catch (error) {
+      setError(error.response.data);
+    }
+  };
+
   const onSubmit = (values) => {
-    let filteredObjects = [];
-
-    values.objects.forEach((object) => {
-      const filteredModules = object.U.filter((module) => module.moduleNumber && module.type);
-      const filteredObject = { ...object, U: [...filteredModules] };
-      filteredObjects.push({ ...filteredObject });
-    });
-
-    console.log('WYFILTROWANE OBIEKTY', filteredObjects);
-
-    console.log('Dane: ', values);
-    console.log('Dane zdżejsonowane: ', JSON.parse(JSON.stringify(values)));
+    saveData(JSON.parse(JSON.stringify(values)));
   };
 
   return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={newReportValidationSchema}
-      onSubmit={onSubmit}
-      validateOnChange={false}
-    >
-      {(formik) => {
-        console.log('FORMIK', formik);
-        const isDisabled = !formik.isValid || !formik.dirty;
+    <>
+      {error ? <Message message={error.message} messageType={'ERROR'} /> : null}
+      {formSubmitted ? <Message message={'Raport zapisany pomyślnie'} messageType={'SUCCESS'} /> : null}
+      <Formik
+        initialValues={initialValues}
+        validationSchema={newReportValidationSchema}
+        onSubmit={onSubmit}
+        validateOnChange={false}
+      >
+        {(formik) => {
+          const isDisabled = !formik.isValid || !formik.dirty;
 
-        const buttonProps = {
-          type: 'submit',
-          disabled: isDisabled,
-        };
+          const buttonProps = {
+            type: 'submit',
+            disabled: isDisabled,
+          };
 
-        return (
-          <Form>
-            <FormSectionWrapper rows={1} columns={3}>
-              {generateFormikControlsFromConfig(newReportForms.firstSection)}
-            </FormSectionWrapper>
-            <SeparateLine />
-            <FormSectionWrapper rows={1} columns={4}>
-              {generateFormikControlsFromConfig(newReportForms.secondSection)}
-            </FormSectionWrapper>
-            <SeparateLine />
-            <FormSectionWrapper rows={4} columns={6}>
-              {generateFormikControlsFromConfig(newReportForms.thirdSection)}
-            </FormSectionWrapper>
-            <SeparateLine />
-            <FormSectionWrapper rows={1} columns={2}>
-              {generateFormikControlsFromConfig(newReportForms.fourthSection)}
-            </FormSectionWrapper>
-            <SeparateLine />
-            {generateFormikControlsFromConfig(newReportForms.sixthSection)}
-            <SeparateLine />
-            <FormSectionWrapper rows={1} columns={1}>
-              {generateFormikControlsFromConfig(newReportForms.fifthSection)}
-            </FormSectionWrapper>
-            <SubmitButton buttonProps={buttonProps} title="Wyślij" />
-          </Form>
-        );
-      }}
-    </Formik>
+          return (
+            <Form>
+              <FormSectionWrapper rows={1} columns={3}>
+                {generateFormikControlsFromConfig(newReportForms.firstSection)}
+              </FormSectionWrapper>
+              <SeparateLine />
+              <FormSectionWrapper rows={1} columns={4}>
+                {generateFormikControlsFromConfig(newReportForms.secondSection)}
+              </FormSectionWrapper>
+              <SeparateLine />
+              <FormSectionWrapper rows={4} columns={6}>
+                {generateFormikControlsFromConfig(newReportForms.thirdSection)}
+              </FormSectionWrapper>
+              <SeparateLine />
+              <FormSectionWrapper rows={1} columns={2}>
+                {generateFormikControlsFromConfig(newReportForms.fourthSection)}
+              </FormSectionWrapper>
+              <SeparateLine />
+              {generateFormikControlsFromConfig(newReportForms.sixthSection)}
+              <SeparateLine />
+              <FormSectionWrapper rows={1} columns={1}>
+                {generateFormikControlsFromConfig(newReportForms.fifthSection)}
+              </FormSectionWrapper>
+              <SubmitButton buttonProps={buttonProps} title="Wyślij" />
+            </Form>
+          );
+        }}
+      </Formik>
+    </>
   );
 };
 

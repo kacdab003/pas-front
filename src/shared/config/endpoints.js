@@ -14,6 +14,11 @@ export const exchangeReportEndpoints = {
   get: API_URL + '/exchangeReports',
 };
 
+export const newReportEndpoints = {
+  post: API_URL + '/reports',
+  get: API_URL + '/reports',
+};
+
 export const objectEndpoints = {
   post: API_URL + '/objects',
 };
