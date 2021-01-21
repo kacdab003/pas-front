@@ -1,92 +1,74 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import FormInput from '../../../components/FormInput/FormInput';
+import React, { useState } from 'react';
 import SubmitButton from '../../../components/SubmitButton/SubmitButton';
 import SeparateLine from '../../../components/UI/SeparateLine/SeparateLine';
 import exchangeReportConfig from '../../../shared/config/forms/exchangeReport';
-import { ExchangeReportFormWrapper, StyledExchangeReportForm } from './StyledExchangeReportForm';
+import { StyledExchangeReportForm } from './StyledExchangeReportForm';
 import axios from '../../../axios';
-import { exchangeReportEndpoints } from '../../../shared/config/endpoints';
+
+import generateFormikControlsFromConfig from '../../../shared/config/forms/generateFormikControlsFromConfig';
 import Message from '../../../components/Message/Message';
 import { hideMessage } from '../../../shared/utils/forms/formUtils';
+import { Form, Formik } from 'formik';
+import { exchangeReportEndpoints } from '../../../shared/config/endpoints';
+import exchangeReportValidationSchema from '../../../shared/config/forms/exchangeReportValidationSchema';
 
 const ExchangeReportForm = () => {
-  const [formData, changeFormData] = useState({});
   const [error, setError] = useState(false);
-  const [selects, setSelects] = useState([]);
   const [formSubmitted, setFormSubmitted] = useState(false);
 
-  const saveData = useCallback(async () => {
-    const data = {
-      ...formData,
-    };
+  const initialValues = {
+    exchangeDate: null,
+    objectNumber: 0,
+    socket: 0,
+    exchangeWorker: '',
+    damagedModuleNumber: 0,
+    newModuleNumber: 0,
+  };
+
+  const saveData = async (dataToSave) => {
     try {
       setError(false);
-      await axios.post(exchangeReportEndpoints.post, data);
+      await axios.post(exchangeReportEndpoints.post, dataToSave);
       setFormSubmitted(true);
       hideMessage(setFormSubmitted);
     } catch (error) {
       setError(error.response.data);
     }
-  }, [formData]);
+  };
 
-  const formSubmitHandler = useCallback(
-    (event) => {
-      setFormSubmitted(false);
-      event.preventDefault();
-      saveData();
-    },
-    [saveData]
-  );
-
-  const inputChangedHandler = useCallback((event) => {
-    event.preventDefault();
-    changeFormData((prevState) => ({ ...prevState, [event.target.name]: event.target.value }));
-  }, []);
-
-  useEffect(() => {
-    exchangeReportConfig.inputs.forEach((input) => changeFormData((prevState) => ({ ...prevState, [input.name]: '' })));
-    exchangeReportConfig.selects.forEach((select) =>
-      changeFormData((prevState) => ({ ...prevState, [select.name]: '' }))
-    );
-    const selectsFromConfig = exchangeReportConfig.selects.map(
-      ({ name, required, label, refEndpoint, refKey, defaultOptionLabel }) => {
-        const selectProps = {
-          name,
-          required,
-          label,
-          onChange: inputChangedHandler,
-        };
-        return <></>;
-      }
-    );
-
-    setSelects(selectsFromConfig);
-  }, [inputChangedHandler]);
-
-  const inputs = exchangeReportConfig.inputs.map(({ type, name, required, placeholder, label }) => {
-    const inputProps = {
-      type,
-      label,
-      name,
-      required,
-      placeholder,
-      onChange: inputChangedHandler,
-    };
-    return <FormInput key={label} labelContent={label} inputProps={inputProps} />;
-  });
+  const onSubmit = (values) => {
+    saveData(JSON.parse(JSON.stringify(values)));
+  };
 
   return (
     <>
       {error ? <Message message={error.message} messageType={'ERROR'} /> : null}
       {formSubmitted ? <Message message={'Raport zapisany pomyślnie'} messageType={'SUCCESS'} /> : null}
-      <ExchangeReportFormWrapper>
-        <StyledExchangeReportForm>
-          {inputs}
-          {selects}
-        </StyledExchangeReportForm>
-        <SeparateLine />
-        <SubmitButton title={'Zatwierdź'} buttonProps={{ type: 'submit', onClick: formSubmitHandler }} />
-      </ExchangeReportFormWrapper>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={exchangeReportValidationSchema}
+        onSubmit={onSubmit}
+        validateOnChange={false}
+      >
+        {(formik) => {
+          const isDisabled = !formik.isValid || !formik.dirty;
+
+          const buttonProps = {
+            type: 'submit',
+            disabled: isDisabled,
+          };
+
+          return (
+            <Form>
+              <StyledExchangeReportForm>
+                {generateFormikControlsFromConfig(exchangeReportConfig)}
+              </StyledExchangeReportForm>
+              <SeparateLine />
+              <SubmitButton buttonProps={buttonProps} title="Wyślij" />
+            </Form>
+          );
+        }}
+      </Formik>
     </>
   );
 };
