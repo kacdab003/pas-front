@@ -1,4 +1,4 @@
-import { userEndpoints, moduleEndpoints } from '../endpoints';
+import { userEndpoints } from '../endpoints';
 
 const exchangeReportConfig = [
   {
