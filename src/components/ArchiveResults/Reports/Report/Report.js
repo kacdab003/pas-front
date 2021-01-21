@@ -1,6 +1,7 @@
 import React from 'react';
 import { IconButton } from '../../../IconButton/IconButton';
 import { ReportContainer, ReportElement } from './StyledReport';
+
 import openIcon from '../../../../assets/icons/open.svg';
 import editIcon from '../../../../assets/icons/edit.png';
 import deleteIcon from '../../../../assets/icons/delete.png';

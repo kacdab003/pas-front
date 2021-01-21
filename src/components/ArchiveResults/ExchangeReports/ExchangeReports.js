@@ -4,23 +4,50 @@ import SearchBar from '../../SearchBar/SearchBar';
 import { ErrorResults } from '../StyledArchiveResults';
 import ExchangeReport from './ExchangeReport/ExchangeReport';
 
+import { useHistory } from 'react-router';
+
 const ExchangeReports = ({ exchangeReportsArray }) => {
   const [searchQuery, setSearchQuery] = useState('');
+  const history = useHistory();
 
   let mappedExchangeReports = exchangeReportsArray.data;
   if (searchQuery) {
     mappedExchangeReports = mappedExchangeReports.filter((report) => {
+
+      const lowerCasedSearchQuery = searchQuery.toLowerCase().trim();
       const isSearchResult =
-        report?.damagedModuleNumber?.toString?.()?.includes?.(searchQuery) ||
-        report?.exchangeDate?.toString?.()?.includes?.(searchQuery) ||
-        report?.exchangeWorker?.fullName?.includes?.(searchQuery) ||
-        report?.newModuleNumber?.toString?.()?.includes?.(searchQuery) ||
-        report?.objectNumber?.toString?.()?.includes?.(searchQuery) ||
-        report?.socker?.toString?.().includes?.(searchQuery);
+        report?.damagedModuleNumber?.toString?.()?.toLowerCase?.()?.includes?.(lowerCasedSearchQuery) ||
+        report?.exchangeDate?.toString?.()?.toLowerCase?.()?.includes?.(lowerCasedSearchQuery) ||
+        report?.exchangeWorker?.fullName?.toLowerCase?.()?.includes?.(lowerCasedSearchQuery) ||
+        report?.newModuleNumber?.toString?.()?.toLowerCase?.()?.includes?.(lowerCasedSearchQuery) ||
+        report?.objectNumber?.toString?.()?.toLowerCase?.()?.includes?.(lowerCasedSearchQuery) ||
+        report?.socket?.toString?.().includes?.(lowerCasedSearchQuery);
       return isSearchResult;
     });
   }
-  const exchangeReportsToRender = mappedExchangeReports.map((exchangeReport) => <ExchangeReport {...exchangeReport} />);
+
+  const exchangeReportEditHandler = (reportId) => {
+    history.push({
+      pathname: '/exchange-report-edit',
+      state: reportId,
+    });
+  };
+
+  const exchangeReportDeleteHandler = (reportId) => {
+    history.push({
+      pathname: '/exchange-report-delete',
+      state: reportId,
+    });
+  };
+
+  const exchangeReportsToRender = mappedExchangeReports.map((exchangeReport) => (
+    <ExchangeReport
+      {...exchangeReport}
+      editHandler={() => exchangeReportEditHandler(exchangeReport._id)}
+      deleteHandler={() => exchangeReportDeleteHandler(exchangeReport._id)}
+    />
+  ));
+  
   let content =
     exchangeReportsToRender.length === 0 ? (
       <ErrorResults>

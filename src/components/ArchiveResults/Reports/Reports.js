@@ -27,6 +27,7 @@ const Reports = ({ reportsArray }) => {
 
   if (searchQuery) {
     mappedReportsElements = mappedReportsElements.filter((report) => {
+
       const isSearchResult =
         report?.key?.toString?.().includes?.(searchQuery) ||
         report?.date?.toString?.().includes?.(searchQuery) ||
